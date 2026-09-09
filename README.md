@@ -21,3 +21,8 @@ IT 학원 AX 아카데미 강의 실습 및 학습일지
   - [Session 3: 메모리 주소(id, is), 얕은 복사(copy), 2장 되새김 문제 풀이](./Python/Day%202/session3.md)
   - [Session 4: 조건문(if), 논리/멤버십 연산자, while 루프, break/continue, while-else](./Python/Day%202/session4.md)
   - [Session 5: while 무한 루프, 컬렉션 형 변환, 집합 연산 복습](./Python/Day%202/session5.md)
+- [Day 3: for 반복문, 리스트 컴프리헨션, 함수 및 사용자 입출력](./Python/Day%203/README.md)
+  - [Session 1: for 반복문, for-else, reversed(), range(), 구구단 이중 루프](./Python/Day%203/session1.md)
+  - [Session 2: 리스트 컴프리헨션, 3장 되새김 문제 6종 종합 풀이](./Python/Day%203/session2.md)
+  - [Session 3: 함수(Function), 다중 반환값, 가변 인자(*args, **kwargs), 할인 계산기](./Python/Day%203/session3.md)
+  - [Session 4: 사용자 입출력(input, print), 형 변환, 포매팅 및 평균 계산 함수](./Python/Day%203/session4.md)

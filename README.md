@@ -50,4 +50,13 @@ IT 학원 AX 아카데미 강의 실습 및 학습일지
   - [Session 1: 코루틴(async/await, gather), 스레드(Thread, join), 비동기 vs 멀티스레딩 비교, GIL](./Python/Day%208/session1.md)
   - [Session 2: 다중 스레드 일괄 생성 및 실행, 리스트 수집 패턴, join 동기화, 스케줄링 비결정성](./Python/Day%208/session2.md)
 
+---
+
+### 📂 Portfolio
+
+- [콘솔 기반 사용자 관리 시스템 (CMS)](./Portfolio/CMS.md)
+  - 계층화 아키텍처(Layered Architecture), 관심사 분리(SoC), 의존성 주입(DI)
+  - 회원가입 유효성 검사, 인증/세션 관리, JSON 기반 영속화(CRUD)
+
+
 

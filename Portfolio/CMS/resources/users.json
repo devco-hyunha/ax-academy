@@ -1,0 +1,11 @@
+[
+    {
+        "uid": "test",
+        "username": "test",
+        "email": "test@test.com",
+        "password": "12341234",
+        "createdAt": 1789541404,
+        "updatedAt": 1789541404,
+        "id": 1
+    }
+]

@@ -49,6 +49,11 @@ IT 학원 AX 아카데미 강의 실습 및 학습일지
 - [Day 8: 동시성 프로그래밍(비동기 프로그래밍 asyncio, 멀티스레딩 threading)](./Python/Day%208/README.md)
   - [Session 1: 코루틴(async/await, gather), 스레드(Thread, join), 비동기 vs 멀티스레딩 비교, GIL](./Python/Day%208/session1.md)
   - [Session 2: 다중 스레드 일괄 생성 및 실행, 리스트 수집 패턴, join 동기화, 스케줄링 비결정성](./Python/Day%208/session2.md)
+- [Day 9: 가변 인자/예외 설계, 정규 표현식(re), CSV 처리 및 OS 파일 시스템 제어](./Python/Day%209/README.md)
+  - [Session 1: 가변 인자(*args), 조기 반환, 사용자 정의 예외 계층, raise 및 세부 try-except](./Python/Day%209/session1.md)
+  - [Session 2: 정규 표현식(re), 메타문자, match vs search vs findall, 이메일 검증, 그룹핑 추출](./Python/Day%209/session2.md)
+  - [Session 3: csv 모듈(reader vs DictReader), os 모듈 파일 시스템 제어 및 경로 탐색](./Python/Day%209/session3.md)
+  - [Test: 객체 모델링, pickle 바이너리 직렬화, 권한 분기 기반 TodoSystem](./Python/Day%209/test.py)
 
 ---
 
@@ -57,6 +62,9 @@ IT 학원 AX 아카데미 강의 실습 및 학습일지
 - [콘솔 기반 사용자 관리 시스템 (CMS)](./Portfolio/CMS.md)
   - 계층화 아키텍처(Layered Architecture), 관심사 분리(SoC), 의존성 주입(DI)
   - 회원가입 유효성 검사, 인증/세션 관리, JSON 기반 영속화(CRUD)
+- [대학생 시뮬레이터 (CLI 턴제 육성 게임)](./Portfolio/Game.md)
+  - 계층화 아키텍처(Controller / Service / View / Manager / Config)
+  - 12개월 턴제 루프 및 행동 스케줄링, 터미널 CJK 너비 정렬, JSON 슬롯 세이브/로드 시스템
 
 
 

@@ -42,8 +42,8 @@ DEFAULT_STATS = {
 }
 
 STAT_LABELS = {
-  'money': '재력',
-  'int': '지능',
+  'money': '소지금',
+  'intelligence': '지능',
   'charm': '매력',
   'stamina': '체력',
   'stress': '스트레스',

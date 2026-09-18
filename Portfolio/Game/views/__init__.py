@@ -1,4 +1,5 @@
 from .intro_views import *
-from .display_saves_views import *
+from .character_views import *
+from .schedule_views import *
 
-__all__ = ['IntroViews', 'DisplaySavesViews']
+__all__ = ['IntroViews', 'CharacterViews', 'ScheduleViews']

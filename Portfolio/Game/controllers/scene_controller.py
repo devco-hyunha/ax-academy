@@ -1,12 +1,15 @@
 import sys
-from views import IntroViews, DisplaySavesViews
+from views import IntroViews, CharacterViews
 from services import CharacterServices
+from .schedule_controller import ScheduleController
 
 class SceneController():
   def __init__(self, store):
+    self.scheduleController = ScheduleController(store)
     self.characterServices = CharacterServices(store)
+
     self.introViews = IntroViews()
-    self.displaySavesViews = DisplaySavesViews()
+    self.characterViews = CharacterViews()
 
   def intro(self):
     while True:
@@ -16,7 +19,7 @@ class SceneController():
         self.start()
         break
       if menuChoice == 2:
-        self.displaySaves()
+        self.chooseSave()
         continue
       if menuChoice == 3:
         self.exit()
@@ -24,17 +27,17 @@ class SceneController():
   def start(self):
     print('new game!')
 
-  def displaySaves(self):
+  def chooseSave(self):
     saves = self.characterServices.findAllCharacters()
-    if len(saves) == 0:
-      print('No saves found')
 
-    self.displaySavesViews.displaySavesTitle()
-    choice = self.displaySavesViews.displaySavesMenu(saves)
+    self.characterViews.chooseSaveFileTitle()
+    choice = self.characterViews.chooseSaveFile(saves) - 1
     if choice == len(saves):
       return
     else:
-      self.characterServices.loadCharacter(choice)
+      character = self.characterServices.loadCharacter(choice)
+      if character:
+        self.lobby(character)
 
   def exit(self):
     print()
@@ -42,8 +45,17 @@ class SceneController():
     print()
     sys.exit(0)
 
-  def schduleSeletion():
-    pass
+  def lobby(self, character):
+    while True:
+      self.characterViews.title(character)
+      self.characterViews.stats(character.get('stats'))
 
-  def viewStat():
-    pass
+      if character.get('ending') is not None:
+        print('end!')
+        break
+
+      choice = self.characterViews.menu()
+      if choice == 1:
+        self.scheduleController.scheduleSelection(character)
+      if choice == 2:
+        break

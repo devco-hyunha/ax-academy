@@ -17,15 +17,15 @@ class SceneController():
       menuChoice = self.introViews.introMenu()
       if menuChoice == 1:
         self.start()
-        break
       if menuChoice == 2:
         self.chooseSave()
-        continue
       if menuChoice == 3:
         self.exit()
 
   def start(self):
-    print('new game!')
+    character = self.characterServices.createCharacter()
+    if character:
+      self.lobby(character)
 
   def chooseSave(self):
     saves = self.characterServices.findAllCharacters()

@@ -28,12 +28,16 @@ class SystemViews:
       print(f'  [{index + 1}] {menu}')
 
   @staticmethod
+  def input(placeholder):
+    value = input(f'{placeholder} >>> ').strip()
+    print()
+    return value
+
+  @staticmethod
   def choice(placeholder, max, min = 1):
     while True:
-      value = input(f'{placeholder} >>> ').strip()
-      print()
-
-      if value is None: 
+      value = SystemViews.input(placeholder)
+      if value is None:
         continue
       else:
         try:

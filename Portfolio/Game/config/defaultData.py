@@ -12,6 +12,7 @@ DEFAULT_DATA = {
     'history': [],
     'action_counts': {},
     'events_triggered': [],
+    'pending_event': None,
     'ending': None,
   }
 }

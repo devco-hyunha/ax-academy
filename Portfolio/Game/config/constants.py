@@ -48,6 +48,8 @@ STAT_LABELS = {
   'stamina': '체력',
   'stress': '스트레스',
 }
+SCHEDULE_KIND_ACTION = 'action'
+SCHEDULE_KIND_FIXED_EVENT = 'fixed_event'
 
 OUTCOME_CRITICAL_SUCCESS = 'critical_success'
 OUTCOME_SUCCESS = 'success'

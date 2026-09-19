@@ -1,4 +1,5 @@
 from .actions_services import ActionsServices
 from .character_services import CharacterServices
+from .event_services import EventServices
 
-__all__ = ['ActionsServices', 'CharacterServices']
+__all__ = ['ActionsServices', 'CharacterServices', 'EventServices']

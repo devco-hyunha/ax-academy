@@ -5,6 +5,12 @@
 | [session1](./session1.md) | 핵심 기능 · 환경 설정 · 저장소 | `git config`, `git init` |
 | [session2](./session2.md) | 버전 관리 (add → commit) | `git status`, `git add`, `git commit`, `git log` |
 | [session3](./session3.md) | 작업 되돌리기 | `git restore`, `git reset`, `git revert` |
+| [session4](./session4.md) | 브랜치 | `git branch`, `git switch`, `git merge` |
+| [session5](./session5.md) | 깃허브 (원격) | `git remote`, `git push`, `git pull`, SSH |
+| [session6](./session6.md) | 깃 협업 | `git clone`, `git fetch`, `git pull` |
+| [session7](./session7.md) | merge vs rebase | `git merge`, `git rebase`, `git pull --rebase` |
+| [session8](./session8.md) | VS Code 소스 제어 & 워크플로우 | GUI 스테이징·커밋·브랜치, PR 협업 흐름 |
+| [session9](./session9.md) | README 파일 | 프로젝트 안내 문서 구조 및 작성법 |
 
 ## 전체 흐름
 

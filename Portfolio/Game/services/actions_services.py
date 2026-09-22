@@ -8,16 +8,18 @@ from config import (
 )
 
 class ActionsServices:
-  def __init__(self, store):
-    self.store = store
+  def __init__(self):
+    pass
 
-  def findAllActions(self):
+  @staticmethod
+  def findAllActions():
     return [
       { 'id': action.get('id'), 'name': action.get('name') }
       for action in ACTIONS
     ]
 
-  def buildDayQueue(self, schedules):
+  @staticmethod
+  def buildDayQueue(schedules):
     """
     스케줄 슬롯({ kind, id })을 일자 큐로 펼침.
     각 슬롯 = DAYS_PER_ACTION일.
@@ -36,7 +38,8 @@ class ActionsServices:
       ])
     return dayQueue
 
-  def applyDay(self, character, actionId, day=None):
+  @staticmethod
+  def applyDay(character, actionId, day=None):
     """
     액션 1일분만 반영. 이벤트 조회/저장은 하지 않음.
     (Phase 1에서 outcome·delta 계산 구현)

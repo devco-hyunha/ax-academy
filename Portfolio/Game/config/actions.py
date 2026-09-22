@@ -1,9 +1,11 @@
+# money: 행동 1일당 소지금 변화 (원, KRW)
+
 ACTIONS = [
   {
     'id': 1,
     'name': '취업 준비',
     'weights': {
-      'money': 0,
+      'money': -15_000,
       'intelligence': 4,
       'charm': 1,
       'stamina': -1,
@@ -14,7 +16,7 @@ ACTIONS = [
     'id': 2,
     'name': '알바',
     'weights': {
-      'money': 5,
+      'money': 90_000,
       'intelligence': 0,
       'charm': 0,
       'stamina': -3,
@@ -25,7 +27,7 @@ ACTIONS = [
     'id': 3,
     'name': '외관 관리',
     'weights': {
-      'money': -1,
+      'money': -45_000,
       'intelligence': 0,
       'charm': 4,
       'stamina': 2,
@@ -36,7 +38,7 @@ ACTIONS = [
     'id': 4,
     'name': '쇼핑',
     'weights': {
-      'money': -5,
+      'money': -120_000,
       'intelligence': 0,
       'charm': 2,
       'stamina': 0,
@@ -47,7 +49,7 @@ ACTIONS = [
     'id': 5,
     'name': '건강 관리',
     'weights': {
-      'money': -1,
+      'money': -35_000,
       'intelligence': 0,
       'charm': 0,
       'stamina': 4,
@@ -58,7 +60,7 @@ ACTIONS = [
     'id': 6,
     'name': '영어 공부',
     'weights': {
-      'money': 0,
+      'money': -12_000,
       'intelligence': 5,
       'charm': 0,
       'stamina': -1,
@@ -69,7 +71,7 @@ ACTIONS = [
     'id': 7,
     'name': '돈 모으기',
     'weights': {
-      'money': 3,
+      'money': 30_000,
       'intelligence': 1,
       'charm': 0,
       'stamina': 0,
@@ -80,7 +82,7 @@ ACTIONS = [
     'id': 8,
     'name': '휴식/여가',
     'weights': {
-      'money': -1,
+      'money': -28_000,
       'intelligence': 0,
       'charm': 0,
       'stamina': 2,

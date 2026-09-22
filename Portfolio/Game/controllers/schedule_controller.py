@@ -7,16 +7,23 @@ from config import (
   SCHEDULE_KIND_ACTION,
   SCHEDULE_KIND_FIXED_EVENT,
   STATUS,
+  ENDINGS
 )
 from views import ScheduleViews, CharacterViews
-from services import ActionsServices, CharacterServices, EventServices
+from views.system_views import SystemViews
+from services import (
+  ActionsServices,
+  CharacterServices,
+  EventServices,
+  get_ending
+)
 
 
 class ScheduleController:
   def __init__(self, store):
     self.actionsServices = ActionsServices()
     self.characterServices = CharacterServices(store)
-    self.eventServices = EventServices(store)
+    self.eventServices = EventServices()
     self.scheduleViews = ScheduleViews()
     self.characterViews = CharacterViews()
     self.isCancel = False
@@ -60,7 +67,7 @@ class ScheduleController:
       if month < TOTAL_MONTHS:
         self.nextMonth(character)
       else:
-        self.endGame(character, 'ending')
+        self.endGame(character)
         break
 
   def initializeSchedules(self, month):
@@ -148,12 +155,23 @@ class ScheduleController:
     self.saveCharacter(character)
     self.scheduleViews.nextMonth()
 
-  def endGame(self, character, ending):
-    # todo: 엔딩 뷰
-    print('엔딩을 맞이합니다!')
-    print()
+  def endGame(self, character, ending=None):
+    if ending is None:
+      result = get_ending(character.get('stats') or {})
+    elif isinstance(ending, dict):
+      result = ending
+    elif ending in ENDINGS:
+      result = ENDINGS[ending]
+    else:
+      result = {'id': ending, 'name': ending, 'message': ''}
 
-    character['ending'] = ending
+    SystemViews.headline('엔딩', result.get('name', ''))
+    if result.get('message'):
+      print(result['message'])
+      print()
+    self.characterViews.stats(character.get('stats') or {})
+
+    character['ending'] = result.get('id') or result.get('name')
     self.saveCharacter(character)
 
   def saveCharacter(self, character):

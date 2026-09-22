@@ -1,5 +1,6 @@
 from .system_views import SystemViews
 from config import STAT_LABELS, TOTAL_MONTHS
+from config.endings import ENDINGS
 from utils import padByDisplayWidth
 
 class CharacterViews:
@@ -14,7 +15,8 @@ class CharacterViews:
     if ending is None:
       SystemViews.subtitle(f'{name} - {month}월')
     else:
-      SystemViews.subtitle(f'{name}')# todo: 엔딩
+      endingName = ENDINGS.get(ending, {}).get('name', ending)
+      SystemViews.subtitle(f'{name} - 엔딩: {endingName}')
 
   @staticmethod
   def stats(stats, length=20):
@@ -54,7 +56,8 @@ class CharacterViews:
       for i, character in enumerate(list):
         if character is not None and i < 8:
           ending = character.get('ending')
-          ending_text = f" / 엔딩: {ending}" if ending else ''
+          ending_name = ENDINGS.get(ending, {}).get('name', ending) if ending else ''
+          ending_text = f" / 엔딩: {ending_name}" if ending else ''
           name = character.get('name')
           saved_text = f"{name if name else 'unknown'} "
           saved_text += f"- {character.get('month')}월 "

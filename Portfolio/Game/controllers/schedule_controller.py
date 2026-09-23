@@ -4,13 +4,13 @@ from config import (
   TOTAL_MONTHS,
   MONTHLY_ACTIONS,
   DAY_PAUSE_SECONDS,
-  SCHEDULE_KIND_ACTION,
   SCHEDULE_KIND_FIXED_EVENT,
   STATUS,
-  ENDINGS
+  CODE,
+  ENDINGS,
+  EVENTS,
 )
 from views import ScheduleViews, CharacterViews
-from views.system_views import SystemViews
 from services import (
   ActionsServices,
   CharacterServices,
@@ -53,11 +53,17 @@ class ScheduleController:
           break
 
         selectedAction = actions[menuIndex]
-        schedules[currentIndex] = {
-          'kind': SCHEDULE_KIND_ACTION,
-          'id': selectedAction.get('id'),
-          'name': selectedAction.get('name'),
-        }
+        result = self.actionsServices.selectScheduleAction(
+          character,
+          selectedAction.get('id'),
+          schedules,
+          currentIndex,
+        )
+        if result.get('status') == STATUS['ERROR']:
+          if result.get('code') == CODE['INSUFFICIENT_MONEY']:
+            actionName = (result.get('data') or {}).get('action_name')
+            self.scheduleViews.insufficientMoney(actionName)
+          continue
 
       if self.isCancel:
         break
@@ -96,6 +102,37 @@ class ScheduleController:
     self.scheduleViews.monthStart(character.get('month'))
     self.runDayQueue(character, dayQueue)
 
+  def enrichEventDayLog(self, dayLog, character, day):
+    if not dayLog:
+      return dayLog
+
+    logType = dayLog.get('type')
+    if logType not in ('fixed_event', 'event'):
+      return dayLog
+
+    eventId = dayLog.get('event_id')
+    event = EVENTS.get(eventId) or {}
+    name = event.get('name')
+    enriched = {
+      **dayLog,
+      'month': character.get('month'),
+      'day': day if dayLog.get('day') is None else dayLog.get('day'),
+    }
+
+    if logType == 'fixed_event':
+      enriched['event_name'] = name
+      return enriched
+
+    if dayLog.get('finished'):
+      enriched['message'] = event.get('finish_message') or (
+        f'{name}이 끝나 내일부터 스케줄대로 활동할 수 있다.'
+      )
+    else:
+      enriched['message'] = event.get('progress_message') or (
+        f'{name} 때문에 일정을 진행할 수 없다.'
+      )
+    return enriched
+
   def runDayQueue(self, character, dayQueue):
     """
     컨트롤러 오케스트레이션:
@@ -113,7 +150,7 @@ class ScheduleController:
           break
         payload = eventResult.get('data') or {}
         character = payload.get('character') or character
-        dayLog = payload.get('day_log')
+        dayLog = self.enrichEventDayLog(payload.get('day_log'), character, day)
       elif item.get('kind') == SCHEDULE_KIND_FIXED_EVENT:
         fixedResult = self.eventServices.applyFixedEventDay(
           character, item.get('id'), day,
@@ -122,7 +159,7 @@ class ScheduleController:
           break
         payload = fixedResult.get('data') or {}
         character = payload.get('character') or character
-        dayLog = payload.get('day_log')
+        dayLog = self.enrichEventDayLog(payload.get('day_log'), character, day)
       else:
         actionResult = self.actionsServices.applyDay(
           character, item.get('id'), day,
@@ -140,11 +177,11 @@ class ScheduleController:
         if found:
           character['pending_event'] = self.eventServices.toPendingEvent(found)
 
-      # 팀원 CharacterService 구현 대기 — 호출 자리만 유지
       self.saveCharacter(character)
 
       if dayLog:
-        print(dayLog)
+        self.scheduleViews.dayLog(dayLog)
+
       sleep(DAY_PAUSE_SECONDS)
 
   def nextMonth(self, character):
@@ -165,12 +202,7 @@ class ScheduleController:
     else:
       result = {'id': ending, 'name': ending, 'message': ''}
 
-    SystemViews.headline('엔딩', result.get('name', ''))
-    if result.get('message'):
-      print(result['message'])
-      print()
-    self.characterViews.stats(character.get('stats') or {})
-
+    self.scheduleViews.showEnding(result, character.get('stats') or {})
     character['ending'] = result.get('id') or result.get('name')
     self.saveCharacter(character)
 

@@ -5,7 +5,7 @@ EVENTS = {
     'midterm': {
         'id': 'midterm',
         'name': '중간고사',
-        'message': '중간고사가 시작되었습니다!',
+        'message': '중간고사 기간입니다.',
         'interaction': 'math_quiz',
         'difficulty': 'easy',
         'time_limit': 20,
@@ -40,7 +40,7 @@ EVENTS = {
     'final_exam': {
         'id': 'final_exam',
         'name': '기말고사',
-        'message': '기말고사가 시작되었습니다!',
+        'message': '기말고사 기간입니다.',
         'interaction': 'math_quiz',
         'difficulty': 'hard',
         'time_limit': 20,
@@ -113,6 +113,8 @@ EVENTS = {
         'id': 'illness',
         'name': '갑작스러운 몸살',
         'message': '무리한 일정 때문인지 몸살에 걸려 며칠 동안 누워 지냈다.',
+        'progress_message': '몸이 아파 일정을 진행할 수 없다.',
+        'finish_message': '아픈 게 나아서 내일부터 스케줄대로 활동할 수 있다.',
         'type': 'condition',
         'once_per_month': True, #같은 달에는 한번만
 

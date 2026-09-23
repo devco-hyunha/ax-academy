@@ -8,6 +8,7 @@ __all__ = [
   'ACTIONS',
   'STATUS',
   'CODE',
+  'CHARACTER_TEMPLATE',
   'DEFAULT_DATA',
   'DEFAULT_STATS',
   'STAT_LABELS',

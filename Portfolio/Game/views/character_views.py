@@ -42,6 +42,14 @@ class CharacterViews:
     return SystemViews.choice('메뉴 선택', len(menus))
 
   @staticmethod
+  def createCharacterTitle():
+    SystemViews.subtitle('캐릭터 생성')
+
+  @staticmethod
+  def inputName() -> str:
+    return SystemViews.input('이름 입력 (미입력 시 unknown)')
+
+  @staticmethod
   def chooseSaveFileTitle():
     SystemViews.subtitle('저장 파일 선택')
 

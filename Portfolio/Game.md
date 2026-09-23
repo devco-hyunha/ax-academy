@@ -1,25 +1,33 @@
-# Game — 대학생 시뮬레이터 분석
+# Game — 대학생 시뮬레이터
 
-CLI 기반의 **대학생 인생 시뮬레이터**다. 12개월 동안 매월 행동을 선택해 스탯을 키우고, 이벤트·엔딩으로 결말을 내는 구조를 목표로 한다. 현재는 **인트로 → 세이브 선택 → 로비 → 스케줄 선택** 흐름까지 연결되어 있고, 캐릭터 영속화·행동 적용·엔딩 판정은 스켈레톤 단계다.
+CLI 기반 **대학생 인생 시뮬레이터**. 12개월 동안 매월 행동을 선택해 스탯을 키우고, 이벤트·엔딩으로 결말을 낸다.
+
+**인트로 → 캐릭터 생성/이어하기 → 로비 → 월간 스케줄 → 엔딩** 본편 루프와  
+**캐릭터 영속화**(`CharacterServices` ↔ `DataManager` ↔ `resources/character.json`)가 연결되어 있다.
 
 ---
 
 ## 1. 프로젝트 개요
 
-| 항목 | 내용 |
-|------|------|
-| 실행 진입점 | `Game/main.py` |
-| 장르 | 텍스트 기반 턴제 시뮬레이션 |
-| UI | 터미널 입출력 (CLI) |
-| 영속화 | `resources/*.json` (JSON 파일) |
-| 아키텍처 | Controller / Service / View / Manager / Config 계층 분리 |
+| 항목        | 내용                                              |
+| ----------- | ------------------------------------------------- |
+| 실행 진입점 | `Game/main.py`                                    |
+| 장르        | 텍스트 기반 턴제 시뮬레이션                       |
+| UI          | 터미널 입출력 (CLI)                               |
+| 영속화      | `resources/character.json` (세이브 슬롯 최대 8개) |
+| 아키텍처    | Controller / Service / View / Manager / Config    |
 
-**핵심 규칙 (설계값, `config/constants.py`)**
+**핵심 규칙** (`config/constants.py`)
 
-- 총 **12개월** (`TOTAL_MONTHS`)
-- 월당 **행동 3회** (`MONTHLY_ACTIONS`), 행동당 **10일** (`DAYS_PER_ACTION`)
-- 스탯 범위 `0 ~ 100` (`STAT_MIN` / `STAT_MAX`)
-- 초기 스탯: 재력 500, 지능·매력·체력 5, 스트레스 0
+| 항목           | 값                                               |
+| -------------- | ------------------------------------------------ |
+| 총 개월        | 12 (`TOTAL_MONTHS`)                              |
+| 월당 행동 슬롯 | 3 (`MONTHLY_ACTIONS`)                            |
+| 슬롯당 일수    | 10 (`DAYS_PER_ACTION`)                           |
+| 스탯 범위      | 0 ~ 100 (`money` 제외)                           |
+| 초기 스탯      | 소지금 1,500,000 / 지능·매력·체력 5 / 스트레스 0 |
+| 아웃컴 확률    | 대성공 10% / 성공 60% / 실패 25% / 대실패 5%     |
+| 아웃컴 배율    | ×2 / ×1 / ×0.7 / ×0.5 (`Fraction`)               |
 
 ---
 
@@ -27,31 +35,36 @@ CLI 기반의 **대학생 인생 시뮬레이터**다. 12개월 동안 매월 �
 
 ```
 Portfolio/Game/
-├── main.py                      # 앱 기동, DataManager + SceneController 연결
-├── utils.py                     # 한글 표시 너비 계산·패딩 (터미널 정렬)
-├── config/                      # 상수·스키마·콘텐츠 데이터
-│   ├── constants.py             # STATUS/CODE, 스탯·아웃컴·턴 규칙
-│   ├── defaultData.py           # character 기본 스키마
-│   ├── actions.py               # 선택 가능 행동 + 스탯 weight
-│   ├── events.py                # 이벤트(아픔, 번아웃) mock
-│   └── endings.py               # 엔딩 정의
-├── controllers/                 # 씬·플로우 제어
-│   ├── scene_controller.py      # 인트로 / 세이브 / 로비
-│   └── schedule_controller.py   # 월간 스케줄 선택·월 진행
-├── services/                    # 도메인 로직
-│   ├── character_services.py
-│   └── actions_services.py
-├── managers/                    # 데이터 CRUD·파일 I/O
-│   ├── data_manager.py
-│   └── file_manager.py
-└── views/                       # 터미널 UI
-    ├── system_views.py          # 공통 headline / subtitle / menu / choice
-    ├── intro_views.py
-    ├── character_views.py       # 로비 스탯·세이브 목록
-    └── schedule_views.py        # 월간 행동 선택 UI
+├── main.py
+├── utils.py                          # 한글 표시 너비·패딩
+├── config/
+│   ├── constants.py                  # STATUS/CODE, 턴·아웃컴 규칙
+│   ├── defaultData.py                # CHARACTER_TEMPLATE, DEFAULT_DATA
+│   ├── actions.py                    # 행동 8종 + weight/messages
+│   ├── events.py                     # 고정·조건·랜덤 이벤트
+│   └── endings.py                    # 엔딩 7종
+├── controllers/
+│   ├── scene_controller.py           # 인트로 / 생성·이어하기 / 로비
+│   └── schedule_controller.py        # 월간 스케줄·일별 진행·엔딩
+├── services/
+│   ├── character_services.py         # 캐릭터 CRUD ↔ DataManager
+│   ├── actions_services.py           # 행동 선택·일별 적용
+│   ├── event_services.py             # 고정/조건/랜덤 이벤트
+│   ├── ending_service.py             # get_ending(stats)
+│   └── math_quiz.py                  # 중간/기말 수학 퀴즈
+├── managers/
+│   ├── data_manager.py               # 키 기반 CRUD
+│   └── file_manager.py               # JSON I/O
+├── views/
+│   ├── system_views.py               # 공통 UI
+│   ├── intro_views.py
+│   ├── character_views.py            # 생성·로비·세이브 목록
+│   └── schedule_views.py             # 스케줄·일 로그·엔딩 표시
+└── resources/
+    └── character.json                # 세이브 슬롯 목록 (list)
 ```
 
-실행 시 `Game/resources/` 폴더가 자동 생성되며, 키별 JSON 파일이 저장된다.
+실행 시 `Game/resources/`가 없으면 Manager가 기본값으로 생성한다.
 
 ---
 
@@ -63,145 +76,184 @@ main
   └─ SceneController
         ├─ CharacterServices(store)
         ├─ ScheduleController
+        │     ├─ ActionsServices
+        │     ├─ EventServices
         │     ├─ CharacterServices(store)
-        │     └─ ScheduleViews
+        │     ├─ get_ending
+        │     └─ ScheduleViews / CharacterViews
         ├─ IntroViews
         └─ CharacterViews
 ```
 
-### 기동·플레이 흐름
+### 플레이 흐름
 
-1. `main`이 `Game` 디렉터리 경로로 `DataManager` 생성
-2. `SceneController(store)` 생성 후 `intro()` 호출
-3. 인트로 메뉴: **새로하기 / 이어하기 / 종료**
-4. 이어하기 → 세이브 선택 → `lobby(character)`
-5. 로비: 스탯 표시 → **스케줄 관리** 또는 **뒤로가기**
-6. 스케줄 관리 → `ScheduleController.scheduleSelection()` → 월 증가 / 엔딩 stub
+1. `main` → `DataManager` → `SceneController.intro()`
+2. 인트로: **새로하기 / 이어하기 / 종료**
+3. 새로하기: 이름 입력 → `createCharacter` → lobby  
+   이어하기: 세이브 목록 선택 → `loadCharacter` → lobby
+4. 로비: 스탯 표시 → **스케줄 관리** / **뒤로가기**
+5. 스케줄: 월 슬롯 3개 선택(고정 이벤트 슬롯 포함) → 일별 큐 실행
+6. 매일: 행동 적용 또는 이벤트 진행 → `saveCharacter` → dayLog 표시
+7. 월 종료 → 다음 달 / 12월이면 `get_ending` → `showEnding` → ending 저장
 
 ### 계층 역할
 
-| 계층 | 역할 |
-|------|------|
-| **Controller** | 메뉴 분기, 씬 전환, Service·View 조합 |
-| **Service** | 캐릭터 생성·로드·저장, (예정) 행동 처리 |
-| **View** | 타이틀·메뉴·입력 검증 등 출력만 담당 |
-| **Manager** | 키 기반 CRUD, JSON read/write, 기본값 seed |
-| **Config** | 게임 규칙·행동·이벤트·엔딩 등 정적 데이터 |
+| 계층           | 역할                                       |
+| -------------- | ------------------------------------------ |
+| **Controller** | 메뉴 분기, 씬·월 루프, Service·View 조합   |
+| **Service**    | 캐릭터·행동·이벤트·엔딩·퀴즈 도메인 로직   |
+| **View**       | 표시·입력만 (조회하지 않음)                |
+| **Manager**    | 키 기반 CRUD, JSON read/write, 기본값 seed |
+| **Config**     | 규칙·행동·이벤트·엔딩 정적 데이터          |
 
-결과 객체는 대체로 `{ status, code, data }` 형태로 통일되어 있다 (`STATUS` / `CODE`).
+결과 객체는 `{ status, code, data }` (`STATUS` / `CODE`).
 
 ---
 
 ## 4. 모듈별 상세
 
-### 4.1 `main.py`
-
-- `DataManager(basePath)` → `SceneController` → `intro()`
-- 클래스명이 `main`으로, 모듈/관례상 `Main` 또는 함수형 진입이 더 자연스럽다.
-
-### 4.2 Controllers
+### 4.1 Controllers
 
 **SceneController**
 
-| 메서드 | 상태 | 설명 |
-|--------|------|------|
-| `intro()` | 구현됨 | 인트로 루프 (1: start, 2: chooseSave, 3: exit) |
-| `start()` | stub | `print('new game!')`만 수행 |
-| `chooseSave()` | 부분 구현 | 목록 표시 후 선택 시 `loadCharacter` → `lobby` |
-| `lobby()` | 부분 구현 | 스탯 표시, 스케줄 관리 / 뒤로가기, 12월이면 종료 stub |
-| `exit()` | 구현됨 | 메시지 출력 후 `sys.exit(0)` |
+| 메서드         | 상태 | 설명                                                   |
+| -------------- | ---- | ------------------------------------------------------ |
+| `intro()`      | ✅   | 새로하기 / 이어하기 / 종료                             |
+| `start()`      | ✅   | 이름 입력 → `createCharacter` → lobby (중복 시 재입력) |
+| `chooseSave()` | ✅   | 세이브 목록 UI → `loadCharacter` → lobby               |
+| `lobby()`      | ✅   | 스탯·메뉴, ending 있으면 종료                          |
+| `exit()`       | ✅   | `sys.exit(0)`                                          |
 
 **ScheduleController**
 
-| 메서드 | 상태 | 설명 |
-|--------|------|------|
-| `scheduleSelection()` | 부분 구현 | 행동 선택 루프 → `nextMonth` / `endGame` |
-| `nextMonth()` | 부분 구현 | `month += 1` 후 `saveCharacter` |
-| `endGame()` | 부분 구현 | `ending` 설정 후 `saveCharacter` |
+| 메서드                  | 상태 | 설명                                           |
+| ----------------------- | ---- | ---------------------------------------------- |
+| `scheduleSelection()`   | ✅   | 슬롯 선택(소지금 검사) → `runMonth` → next/end |
+| `initializeSchedules()` | ✅   | 달력 고정 이벤트를 슬롯에 배치                 |
+| `runDayQueue()`         | ✅   | pending / fixed / action → 이벤트 판정         |
+| `enrichEventDayLog()`   | ✅   | event_services 결과 → 표시용 필드 보강         |
+| `nextMonth()`           | ✅   | 월 종료 UI·스탯 → `month += 1` → 저장          |
+| `endGame()`             | ✅   | `get_ending` → `showEnding` → ending 저장      |
+| `saveCharacter()`       | ✅   | `CharacterServices.saveCharacter` 호출         |
 
-### 4.3 Services
+### 4.2 Services
 
-**CharacterServices**
+**CharacterServices** — DataManager 연동
 
-- `createCharacter()`: `DEFAULT_DATA['character']` 딥카피로 인메모리 생성
-- `findAllCharacters()` / `loadCharacter()`: **샘플 데이터** (실제 `DataManager` 미연동)
-- `saveCharacter()`: 미구현
-- `playCharacter`: 현재 플레이 중인 캐릭터 상태 보관용 (미사용)
+| 메서드                               | 설명                                                         |
+| ------------------------------------ | ------------------------------------------------------------ |
+| `findAllCharacters()`                | `store.findAll('character')`, 최대 8슬롯                     |
+| `createCharacter(name, birth_month)` | 슬롯 가득 참 / 중복 이름 / unknown 자동부여 → `store.create` |
+| `loadCharacter(index)`               | 슬롯 인덱스로 로드 → `playCharacter` 지정                    |
+| `saveCharacter(character)`           | `store.update` (사일런트 오토세이브)                         |
+
+- 이름 미입력 → `unknown`, `unknown 2`, … 자동 부여
+- 중복 이름 → `CODE['DUPLICATE_NAME']` 반환 (컨트롤러에서 재입력)
+- 슬롯 8개 초과 → `SLOT_FULL` 반환
 
 **ActionsServices**
 
-- `store`만 보관하는 스켈레톤. 행동 적용·판정 로직 없음.
+- `findAllActions` / `buildDayQueue`
+- `selectScheduleAction`: 소지금 부족 시 `INSUFFICIENT_MONEY`
+- `rollOutcome` / `calcDayDelta` / `applyDay`: weight × 배율, day_log 생성
 
-### 4.4 Managers
+**EventServices**
 
-**FileManager**
+- 고정 일정: `getCalendarEvents` / `applyFixedEventDay`
+- 조건·랜덤: `findTriggeredEvent` / `toPendingEvent` / `applyEventDay`
+- 상호작용: `math_quiz` · `choice` · 효과만 적용
+- 퀴즈 판정: score ≥8 대성공 / ≥5 성공 / ≥2 실패 / 그 외 대실패
 
-- 경로: `{basePath}/resources/{key}.json`
-- `write` / `read`, UTF-8, `ensure_ascii=False`
-- 파일 없음 → `FILE_NOT_FOUND`, JSON 깨짐 → `INVALID_JSON`
+**고정 이벤트 달력**
 
-**DataManager**
+| 월  | 이벤트        | 슬롯 |
+| --- | ------------- | ---- |
+| 4   | 중간고사      | 2    |
+| 5   | 대학 축제     | 2    |
+| 6   | 기말고사      | 2    |
+| 11  | 졸업 프로젝트 | 2    |
 
-- `DEFAULT_DATA`에 등록된 키만 허용 (`UNKNOWN_KEY` 방어)
-- `findAll` / `findBy` / `create` / `update` / `delete` / `save` / `load`
-- 파일 없을 때 기본 스키마를 써 넣고 반환 (auto-seed)
-- `create` 시 `id` 자동 채번 (`generateId`)
+**ending_service** — `get_ending(stats)` → `ENDINGS` 항목 반환  
+**math_quiz** — `runMathQuiz(difficulty, time_limit) -> int`
 
-> 참고: `DEFAULT_DATA['character']`는 **단일 객체 스키마**인데, `DataManager.create`는 **리스트에 append**하는 전제다. 캐릭터 세이브 연동 시 키를 `characters`(리스트)로 두거나, `load`/`create` 계약을 맞출 필요가 있다.
+### 4.3 Managers
 
-### 4.5 Views
+**FileManager** — `{basePath}/resources/{key}.json` read/write  
+**DataManager** — `findAll` / `findBy` / `create` / `update` / `delete` / `save` / `load`, `id` 자동 채번
 
-**SystemViews** — 공통 UI
+- `DEFAULT_DATA['character']` = `[]` (세이브 슬롯 목록)
+- `create`는 리스트에 append 후 `id` 부여
 
-- `lineBreak` / `headline` / `subtitle`
-- `menu` / `choice`: 번호 메뉴 + 범위·숫자 검증 루프
-- `errorMessage`: `[System]` 프리픽스
+### 4.4 Views
 
-**IntroViews** — 타이틀 `대학생 시뮬레이터`, 메뉴 3종  
-**CharacterViews** — 로비 타이틀·스탯 바·메뉴, 세이브 슬롯(최대 8) 선택  
-**ScheduleViews** — 월간 스케줄 타이틀·선택 목록·행동 메뉴
+| View             | 역할                                                                  |
+| ---------------- | --------------------------------------------------------------------- |
+| `SystemViews`    | headline / subtitle / menu / choice / input / errorMessage            |
+| `IntroViews`     | 타이틀, 메뉴 3종                                                      |
+| `CharacterViews` | 캐릭터 생성(제목·이름 입력), 로비 타이틀·스탯 바, 세이브 목록(최대 8) |
+| `ScheduleViews`  | 스케줄 선택, monthStart/End, dayLog, insufficientMoney, showEnding    |
 
-### 4.6 Config (콘텐츠·규칙)
+### 4.5 Config
 
-**스탯** (`DEFAULT_STATS` / `STAT_LABELS`)
+**스키마** (`defaultData.py`)
 
-- money(소지금), intelligence(지능), charm(매력), stamina(체력), stress(스트레스)
-- 라벨 키와 스탯 키가 일치함
+| 상수                 | 용도                                 |
+| -------------------- | ------------------------------------ |
+| `CHARACTER_TEMPLATE` | 새 캐릭터 생성용 단일 dict 템플릿    |
+| `DEFAULT_DATA`       | 파일 저장소 기본값 (`character: []`) |
+
+**주요 CODE** (캐릭터 관련)
+
+| CODE                 | 용도                       |
+| -------------------- | -------------------------- |
+| `DUPLICATE_NAME`     | 캐릭터 이름 중복           |
+| `DUPLICATE_DATA`     | 일반 데이터 중복           |
+| `SLOT_FULL`          | 세이브 슬롯 8개 가득 참    |
+| `SAVE_FAILED`        | 캐릭터 저장 실패           |
+| `INSUFFICIENT_MONEY` | 스케줄 선택 시 소지금 부족 |
 
 **행동** (`ACTIONS`, 8종)
 
-| ID | 이름 | 주요 weight 경향 |
-|----|------|------------------|
-| 1 | 취업 준비 | 지능↑, 스트레스↑ |
-| 2 | 알바 | 재력↑, 체력↓ |
-| 3 | 외관 관리 | 매력↑, 스트레스↓ |
-| 4 | 쇼핑 | 재력↓↓, 스트레스↓↓ |
-| 5 | 건강 관리 | 체력↑, 스트레스↓ |
-| 6 | 영어 공부 | 지능↑↑ |
-| 7 | 돈 모으기 | 재력↑ |
-| 8 | 휴식/여가 | 스트레스↓↓ |
+| ID  | 이름       |
+| --- | ---------- |
+| 1   | 취업 준비  |
+| 2   | 아르바이트 |
+| 3   | 외관 관리  |
+| 4   | 쇼핑       |
+| 5   | 건강 관리  |
+| 6   | 영어 공부  |
+| 7   | 돈 모으기  |
+| 8   | 휴식/여가  |
 
-**아웃컴 배율**
+각 행동에 `weights` · 아웃컴별 `messages`가 있다.
 
-- 대성공 ×2.0 / 성공 ×1.0 / 실패 ×0.3 / 대실패 ×0.0 (+ 스트레스 보너스 2)
+**이벤트** (`EVENTS`)
 
-**이벤트** (`EVENTS`) — schedule 루프 연결 예정 mock
+| ID                                | 유형 | 비고                |
+| --------------------------------- | ---- | ------------------- |
+| `midterm` / `final_exam`          | 고정 | `math_quiz`         |
+| `festival` / `graduation_project` | 고정 | `choice`            |
+| `illness`                         | 조건 | stress ≥ 80, 월 1회 |
+| `travel`                          | 랜덤 | 7~9월               |
+| `mock_interview`                  | 랜덤 | 7~12월              |
 
-- `illness`, `burnout`: stress ≥ 100 시 트리거, 일수 감소 + 스탯 보정
+**엔딩** (`ENDINGS` + `get_ending` 조건 요약)
 
-**엔딩** (`ENDINGS`) — 7종
-
-- 대기업 / 창업 / 해외 도피 / 유튜버 / 노가다 / 중소기업 / 백수
-
-### 4.7 `utils.py`
-
-- `getDisplayWidth`: 한글·자모 2칸, 그 외 1칸
-- `padByDisplayWidth`: left / right / center 정렬 패딩  
-→ CLI에서 한글·영문 혼용 시 박스가 깨지지 않게 함
+| ID              | 이름        | 대략 조건                     |
+| --------------- | ----------- | ----------------------------- |
+| `large_company` | 대기업 취업 | 지능≥75, 매력≥60, 스트레스≤50 |
+| `abroad`        | 해외 도피   | 지능≥70, 소지금≥3,000,000     |
+| `startup`       | 창업        | 소지금≥6,000,000, 지능≥60     |
+| `youtuber`      | 유튜버      | 매력≥75                       |
+| `labor`         | 노가다      | 체력≥80, 지능\<40             |
+| `sme`           | 중소기업    | 지능≥50, 스트레스≤70          |
+| `unemployed`    | 백수        | 그 외                         |
 
 ---
 
 ## 5. 캐릭터 데이터 모델
+
+### 템플릿 (`CHARACTER_TEMPLATE`)
 
 ```python
 {
@@ -209,7 +261,7 @@ main
   'turn': 0,
   'month': 1,
   'stats': {
-    'money': 500,
+    'money': 1_500_000,
     'intelligence': 5,
     'charm': 5,
     'stamina': 5,
@@ -218,71 +270,89 @@ main
   'history': [],
   'action_counts': {},
   'events_triggered': [],
+  'pending_event': None,
   'ending': None,
 }
 ```
 
-세이브 목록 UI는 `name`, `month`, `turn`, `ending`을 사용한다.
+저장 시 `DataManager.create`가 `id`를 부여한다.
+
+### 파일 (`resources/character.json`)
+
+```python
+[
+  { 'id': 1, 'name': '...', 'month': 1, ... },
+  { 'id': 2, 'name': '...', 'month': 3, ... },
+]
+```
+
+세이브 UI는 `name`, `month`, `turn`, `ending`을 표시한다.
 
 ---
 
 ## 6. 구현 완성도
 
-| 영역 | 완성도 | 비고 |
-|------|--------|------|
-| 인트로 메뉴 | ✅ | 새로하기 / 이어하기 / 종료 |
-| 공통 CLI UI | ✅ | headline, subtitle, menu, choice |
-| JSON 파일 계층 | ✅ | FileManager + DataManager CRUD |
-| 세이브 목록 UI | △ | UI 있음, 데이터는 샘플 8개 |
-| 로비(스탯·메뉴) | △ | 표시·분기 가능, 12월 종료는 stub |
-| 스케줄 선택 UI | △ | 선택·월 증가 stub, 행동 적용 없음 |
-| 캐릭터 영속화 | ❌ | Service ↔ Manager 미연결 |
-| 새 게임 시작 | ❌ | stub |
-| 행동 적용·아웃컴 | ❌ | config만 준비 |
-| 이벤트·엔딩 판정 | ❌ | 데이터만 정의 |
+| 영역                    | 상태 | 비고                                 |
+| ----------------------- | ---- | ------------------------------------ |
+| 인트로·로비 UI          | ✅   |                                      |
+| 공통 CLI UI             | ✅   |                                      |
+| JSON Manager            | ✅   |                                      |
+| 스케줄 선택·소지금 검사 | ✅   |                                      |
+| 일별 행동·아웃컴        | ✅   |                                      |
+| 고정/조건/랜덤 이벤트   | ✅   |                                      |
+| 수학 퀴즈               | ✅   |                                      |
+| 엔딩 판정·표시          | ✅   |                                      |
+| 일 로그·엔딩 View       | ✅   |                                      |
+| 캐릭터 영속화           | ✅   | create / findAll / load / save       |
+| 새 게임 이름·저장       | ✅   | `CharacterViews` + `createCharacter` |
+| 이어하기                | ✅   | 실제 세이브 목록에서 로드            |
 
 ---
 
-## 7. 설계상 강점
+## 7. 팀 구성 & 역할 분담
 
-1. **계층 분리가 명확** — View는 출력, Manager는 I/O, Controller는 흐름만 담당
-2. **결과 코드 통일** — `STATUS` / `CODE`로 성공·실패 분기 가능
-3. **콘텐츠와 로직 분리** — 행동·이벤트·엔딩을 config에 두어 밸런스 조정 용이
-4. **한글 CLI 정렬 유틸** — 포트폴리오용 터미널 게임에 실무적으로 유용
-5. **씬/스케줄 컨트롤러 분리** — 인트로·로비와 월간 루프 책임이 나뉨
+| 구분 | 이름   | 담당                                         |
+| ---- | ------ | -------------------------------------------- |
+| 본인 | 지현하 | 프로젝트 골격·본편 루프·계층 연동·UI/Manager |
+| 팀원 | 오효정 | 이벤트 데이터·이벤트 서비스·수학 퀴즈        |
+| 팀원 | 정진규 | 엔딩 판정 서비스                             |
+| 팀원 | 임유빈 | 캐릭터 CRUD·DataManager 영속화               |
+
+### 지현하 (본인)
+
+- CLI 아키텍처 골격 (`main`, Controller / Service / View / Manager / Config)
+- 인트로·로비·스케줄 선택 UI 및 씬 흐름 (`SceneController`, `*Views`)
+- 월간 스케줄 실행 루프·일별 행동/고정 이벤트 처리 (`ScheduleController`, `ActionsServices`)
+- JSON 영속화 기반 (`DataManager`, `FileManager`, `defaultData`)
+- 팀원 모듈 연동 (이벤트·퀴즈·엔딩 → 스케줄/엔딩 플로우)
+- 새 게임 이름 입력·이어하기 UI 연결, `Game.md` 정리
+
+### 오효정
+
+- 이벤트 정적 데이터 (`config/events.py`) — 고정·조건·랜덤
+- 이벤트 도메인 로직 (`event_services.py`) — 달력/트리거/적용
+- 중간·기말 수학 퀴즈 (`math_quiz.py`)
+
+### 정진규
+
+- 엔딩 판정 (`ending_service.py` — `get_ending(stats)`)
+
+### 임유빈
+
+- 캐릭터 서비스 (`character_services.py`)
+  - `createCharacter` / `findAllCharacters` / `loadCharacter` / `saveCharacter`
+  - 세이브 슬롯 8개·이름 중복·unknown 자동 부여
+  - `DataManager` create/update 연동
 
 ---
 
-## 8. 개선·주의 포인트
-
-1. **스키마 불일치**: `DEFAULT_DATA['character']`(객체) vs `DataManager` 리스트 CRUD
-2. **세이브 미연동**: `CharacterServices`가 store를 쓰도록 `findAll` / `create` / `update` 연결 필요
-3. **본편 루프 미완성**: 행동 weight×아웃컴 → 이벤트 → 엔딩 판정 미연결
-4. **`ActionsServices` 빈 구현**
-5. **네이밍**: `main` 클래스, View 메서드의 `@staticmethod`와 인스턴스 혼용
-
----
-
-## 9. 권장 구현 순서 (다음 단계)
-
-1. `characters`(리스트) 키로 세이브 스키마 확정 후 `CharacterServices` ↔ `DataManager` 연동  
-2. `start()`에서 이름 입력 → `createCharacter` → 저장 → `lobby`  
-3. `ActionsServices`: 행동 선택 → 아웃컴 롤 → 스탯 clamp(0~100) 적용  
-4. `scheduleSelection`에서 선택한 스케줄에 행동 적용 + 월간 결과 뷰  
-5. stress 기반 이벤트 트리거, 12개월 종료 시 `ENDINGS` 판정  
-6. 이어하기: 선택 id로 `load` → 로비 재개  
-
----
-
-## 10. 실행 방법
+## 8. 실행 방법
 
 ```bash
 cd Portfolio/Game
 python main.py
 ```
 
-인트로에서 `1` 새로하기 / `2` 이어하기(샘플 목록) / `3` 종료를 선택할 수 있다.
-
 ---
 
-*분석 기준 경로: `Portfolio/Game/` (컨트롤러·서비스·매니저·뷰·config 전 파일)*
+_기준 경로: `Portfolio/Game/`_

@@ -1,4 +1,5 @@
 import sys
+from config import STATUS, CODE
 from views import IntroViews, CharacterViews
 from services import CharacterServices
 from .schedule_controller import ScheduleController
@@ -23,9 +24,21 @@ class SceneController():
         self.exit()
 
   def start(self):
-    character = self.characterServices.createCharacter()
-    if character:
-      self.lobby(character)
+    while True:
+      self.characterViews.createCharacterTitle()
+      name = self.characterViews.inputName()
+      result = self.characterServices.createCharacter(name)
+
+      if result and result.get('status') == STATUS['SUCCESS']:
+        character = result.get('data')
+        if character:
+          self.lobby(character)
+        return
+
+      # 중복 이름이면 재입력
+      if result and result.get('code') == CODE['DUPLICATE_NAME']:
+        continue
+      return
 
   def chooseSave(self):
     saves = self.characterServices.findAllCharacters()

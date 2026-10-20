@@ -1,7 +1,7 @@
 # Session 1 — RDB 특징
 
 > 단원: [unit3_advanced — Advanced Topics](#unit3-advanced---advanced-topics)  
-> 이전: [Session 7 — 서브쿼리](../unit2_queries/session7.md) · 다음: [Session 2 — 데이터 무결성](unit3_advanced/session2.md)
+> 이전: [Session 8 — 날짜/시간 함수](../unit2_queries/session8.md) · 다음: [Session 2 — 데이터 무결성](session2.md)
 
 ## 1. RDB의 특징
 
@@ -31,12 +31,12 @@
 
 ## 이번 세션 목표
 
-| 목표 | 내용 |
-| ---- | ---- |
-| 뷰 (VIEW) | 가상 테이블, 보안 및 간소화 |
-| 인덱스 (INDEX) | 검색 성능 향상을 위한 자료구조 |
-| 트랜잭션 (TRANSACTION) | COMMIT, ROLLBACK, 제약 조건 |
-| 트랜잭션 격리 수준 | READ COMMITTED, REPEATABLE READ 등 |
+| 목표                   | 내용                               |
+| ---------------------- | ---------------------------------- |
+| 뷰 (VIEW)              | 가상 테이블, 보안 및 간소화        |
+| 인덱스 (INDEX)         | 검색 성능 향상을 위한 자료구조     |
+| 트랜잭션 (TRANSACTION) | COMMIT, ROLLBACK, 제약 조건        |
+| 트랜잭션 격리 수준     | READ COMMITTED, REPEATABLE READ 등 |
 
 ---
 
@@ -134,13 +134,13 @@ DROP INDEX idx_emp_empno ON emp;
 
 ### 제어 명령어
 
-| 명령어 | 의미 |
-| ------ | ---- |
-| `START TRANSACTION` / `BEGIN` | 트랜잭션 시작 |
-| `COMMIT` | 현재 트랜잭션의 변경 사항을 영구적으로 저장 |
-| `ROLLBACK` | 트랜잭션 시작 전으로 상태를 되돌림 (미확인 변경 사항 취소) |
-| `SAVEPOINT` | 트랜잭션 내에서 저장점 생성 후 부분 롤백 가능 |
-| `SET TRANSACTION` | 트랜잭션 격리 수준 설정 |
+| 명령어                        | 의미                                                       |
+| ----------------------------- | ---------------------------------------------------------- |
+| `START TRANSACTION` / `BEGIN` | 트랜잭션 시작                                              |
+| `COMMIT`                      | 현재 트랜잭션의 변경 사항을 영구적으로 저장                |
+| `ROLLBACK`                    | 트랜잭션 시작 전으로 상태를 되돌림 (미확인 변경 사항 취소) |
+| `SAVEPOINT`                   | 트랜잭션 내에서 저장점 생성 후 부분 롤백 가능              |
+| `SET TRANSACTION`             | 트랜잭션 격리 수준 설정                                    |
 
 ### 자동 커밋(MySQL 기본값)
 
@@ -171,12 +171,12 @@ COMMIT;
 
 격리 수준에 따라 읽기 현상(Non-repeatable read, Phantom read) 행동이 달라짐
 
-| 격리 수준 | 읽기 비특이성 | 설명 |
-| -------- | ----------- | ---- |
-| `READ UNCOMMITTED` | 발생 가능 | 커밋되지 않은 데이터도 읽을 수 있음 (Dirty read) |
-| `READ COMMITTED` | **일반 기본값** | 새로운 SELECT는 항상 최신 데이터 조회 |
-| `REPEATABLE READ` | **MySQL 기본값** | 트랜잭션 동안 동일한 SELECT 결과 반복 가능 |
-| `SERIALIZABLE` | 발생 안 함 | 가장 엄격함, 모든 트랜잭션을 직렬화 실행 |
+| 격리 수준          | 읽기 비특이성    | 설명                                             |
+| ------------------ | ---------------- | ------------------------------------------------ |
+| `READ UNCOMMITTED` | 발생 가능        | 커밋되지 않은 데이터도 읽을 수 있음 (Dirty read) |
+| `READ COMMITTED`   | **일반 기본값**  | 새로운 SELECT는 항상 최신 데이터 조회            |
+| `REPEATABLE READ`  | **MySQL 기본값** | 트랜잭션 동안 동일한 SELECT 결과 반복 가능       |
+| `SERIALIZABLE`     | 발생 안 함       | 가장 엄격함, 모든 트랜잭션을 직렬화 실행         |
 
 ### MySQL에서 격리 수준 설정
 
@@ -252,4 +252,4 @@ COMMIT;
 
 ---
 
-## [이전: Session 9 — 서브쿼리](unit2_queries/session7.md) · [다음: Session 2 — 숫자 함수](unit3_advanced/session2.md)
+## [이전: Session 7 — 서브쿼리](../unit2_queries/session7.md) · [다음: Session 2 — 데이터 무결성](session2.md)

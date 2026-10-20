@@ -12,12 +12,12 @@ USE hh;
 
 ## 이번 세션 목표
 
-| 목표 | 내용 |
-| ---- | ---- |
-| 컬럼 선택 | `SELECT` 투영, `*` |
-| 중복 제거 | `DISTINCT` |
-| 별칭 | `AS` |
-| 표현식 | 산술 연산, `CONCAT` |
+| 목표      | 내용                |
+| --------- | ------------------- |
+| 컬럼 선택 | `SELECT` 투영, `*`  |
+| 중복 제거 | `DISTINCT`          |
+| 별칭      | `AS`                |
+| 표현식    | 산술 연산, `CONCAT` |
 
 ---
 
@@ -28,14 +28,14 @@ SELECT 컬럼1, 컬럼2, ...
 FROM 테이블명;
 ```
 
-| 구문 | 의미 |
-| ---- | ---- |
-| `SELECT *` | 모든 컬럼 |
-| `SELECT 컬럼` | 필요한 컬럼만 (투영) |
-| `DISTINCT` | 중복 행 제거 |
-| `AS` / 공백 | 결과 컬럼에 별칭 |
-| 산술 (`+`, `-`, `*`, `/`) | 컬럼·상수 연산 |
-| `CONCAT(...)` | 문자열 연결 |
+| 구문                      | 의미                 |
+| ------------------------- | -------------------- |
+| `SELECT *`                | 모든 컬럼            |
+| `SELECT 컬럼`             | 필요한 컬럼만 (투영) |
+| `DISTINCT`                | 중복 행 제거         |
+| `AS` / 공백               | 결과 컬럼에 별칭     |
+| 산술 (`+`, `-`, `*`, `/`) | 컬럼·상수 연산       |
+| `CONCAT(...)`             | 문자열 연결          |
 
 ### (추가) SQL 질의어 실행 순서 (중요!)
 
@@ -154,4 +154,4 @@ SELECT CONCAT(stu_dept, '과 ', stu_name, '입니다') FROM student;
 
 ---
 
-[이전: Session 1 — Basic Theory & DDL](unit1_basic/session1.md) · [다음: Session 2 — WHERE 조건](unit2_queries/session2.md)
+[이전: Session 3 — DML & DDL 변경 · DCL](../unit1_basic/session3.md) · [다음: Session 2 — WHERE 조건](session2.md)

@@ -1,7 +1,7 @@
 # Session 7 — 서브쿼리 (Subquery)
 
 > 단원: [unit2_queries — SQL Querying](#unit2-queries---sql-querying)  
-> 이전: [Session 6 — 집계 함수 + GROUP BY](unit2_queries/session6.md) · 다음: [unit3_advanced — Advanced Topics](../unit3_advanced/session1.md)
+> 이전: [Session 6 — 집계 함수 + GROUP BY](unit2_queries/session6.md) · 다음: [Session 8 — 날짜/시간 함수](session8.md)
 
 단일 SELECT 문 안에서 또 다른 SELECT 문을 사용하는 서브쿼리를 실습한다. 단일행, 다중행, 상관서브쿼리 등 다양한 형태를 다룬다.
 
@@ -213,4 +213,4 @@ FROM (
 
 ---
 
-## [이전: Session 6 — 집계 함수 + GROUP BY](unit2_queries/session6.md) · [다음: unit3_advanced — Advanced Topics](../unit3_advanced/session1.md)
+## [이전: Session 6 — 집계 함수 + GROUP BY](unit2_queries/session6.md) · [다음: Session 8 — 날짜/시간 함수](session8.md)

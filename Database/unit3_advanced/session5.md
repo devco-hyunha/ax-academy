@@ -299,6 +299,4 @@ GROUP BY p.id, p.title;
 
 ---
 
-## [이전: Session 5 — DB 모델링](unit3_advanced/session5.md)
-
-## [마지막 세션]
+## [이전: Session 4 — NoSQL](session4.md) · [다음: Session 6 — 절차형 SQL (프로시저 · 함수)](session6.md)

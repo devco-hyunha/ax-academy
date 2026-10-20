@@ -235,4 +235,4 @@ SELECT stu_name, stu_dept, SUBSTRING(stu_dept, 2, 1) FROM student;
 
 ---
 
-## [이전: Session 3 — 날짜 함수](unit3_advanced/session3.md) · [다음: Session 5 — DB 모델링](unit3_advanced/session5.md)
+## [이전: Session 2 — 데이터 무결성](session2.md) · [다음: Session 4 — NoSQL](session4.md)

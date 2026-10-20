@@ -1,7 +1,7 @@
 # Review — SQL 질의어 종합 복습
 
 > 참고: [Notion — SQL 질의어](https://app.notion.com/p/SQL-256974c0f4ae80d88315e52f30d33497)  
-> 이전: [Session 5 — Redis](unit3_advanced/session5.md)
+> 이전: [Session 7 — 트리거 & 이벤트](unit3_advanced/session7.md)
 
 SELECT·서브쿼리·조인을 한곳에서 복습한다. 작성 순서와 실행 개념을 정리하고, 앞서 배운 문법을 실무 패턴으로 연결한다.
 
@@ -274,4 +274,4 @@ LEFT JOIN emp e ON d.deptno = e.deptno;
 
 ---
 
-## [이전: Session 5 — Redis](unit3_advanced/session5.md) · [README로 이동](README.md)
+## [이전: Session 7 — 트리거 & 이벤트](unit3_advanced/session7.md) · [README로 이동](README.md)

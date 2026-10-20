@@ -1,6 +1,6 @@
 # Session 2 — DDL 실습 (student / subject / enrol)
 
-> 이전: [Session 1 — 기초 이론](unit1_basic/session1.md) · 다음: [Session 1 — SELECT 기초](unit2_queries/session1.md)
+> 이전: [Session 1 — 기초 이론](unit1_basic/session1.md) · 다음: [Session 3 — DML & DDL 변경 · DCL](session3.md)
 
 MySQL에서 DB를 선택한 뒤, 테이블 생성 → 구조 확인 → 데이터 삽입 → 조회 순서로 진행한다.
 
@@ -8,12 +8,12 @@ MySQL에서 DB를 선택한 뒤, 테이블 생성 → 구조 확인 → 데이�
 
 ## 이번 세션 목표
 
-| 목표 | 내용 |
-| ---- | ---- |
+| 목표            | 내용                          |
+| --------------- | ----------------------------- |
 | 테이블 3개 생성 | `student`, `subject`, `enrol` |
-| 제약조건 | PK, 복합키 |
-| 데이터 삽입 | INSERT → SELECT로 확인 |
-| 구조 확인 | `DESC`로 컬럼·키 확인 |
+| 제약조건        | PK, 복합키                    |
+| 데이터 삽입     | INSERT → SELECT로 확인        |
+| 구조 확인       | `DESC`로 컬럼·키 확인         |
 
 ```sql
 USE hh;
@@ -242,13 +242,13 @@ SELECT * FROM enrol;
 
 ### 타입·제약 팁
 
-| 항목 | 설명 |
-| ---- | ---- |
-| `CHAR(n)` | 고정 길이 — 남는 자리는 공백으로 채움 |
-| `VARCHAR(n)` | 가변 길이 — 실제 길이만큼만 저장 |
-| `DECIMAL(5,2)` | 전체 5자리 중 소수 2자리 (예: `177.00`) |
-| `INT` | MySQL 8에서 `INT(1)` 표시 너비는 거의 의미 없음 → `INT`로 충분 |
-| 복합키 | `enrol`의 PK가 두 컬럼 → Composite Key |
+| 항목           | 설명                                                           |
+| -------------- | -------------------------------------------------------------- |
+| `CHAR(n)`      | 고정 길이 — 남는 자리는 공백으로 채움                          |
+| `VARCHAR(n)`   | 가변 길이 — 실제 길이만큼만 저장                               |
+| `DECIMAL(5,2)` | 전체 5자리 중 소수 2자리 (예: `177.00`)                        |
+| `INT`          | MySQL 8에서 `INT(1)` 표시 너비는 거의 의미 없음 → `INT`로 충분 |
+| 복합키         | `enrol`의 PK가 두 컬럼 → Composite Key                         |
 
 ### (참고) FK를 나중에 붙이는 예
 
@@ -272,4 +272,4 @@ ALTER TABLE enrol
 
 ---
 
-[이전: Session 1](session1.md) · [다음: Session 3 — SELECT 기초](session3.md)
+[이전: Session 1 — 기초 이론](session1.md) · [다음: Session 3 — DML & DDL 변경 · DCL](session3.md)

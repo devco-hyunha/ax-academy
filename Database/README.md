@@ -3,10 +3,13 @@
 ## 📁 단원별 구조
 
 ### unit1_basic — Basic Theory & DDL
+
 - [Session 1](unit1_basic/session1.md) — 데이터베이스 기초 이론
 - [Session 2](unit1_basic/session2.md) — DDL 실습
+- [Session 3](unit1_basic/session3.md) — DML & DDL 변경 · DCL
 
 ### unit2_queries — SQL Querying
+
 - [Session 1](unit2_queries/session1.md) — SELECT 기초
 - [Session 2](unit2_queries/session2.md) — WHERE 조건
 - [Session 3](unit2_queries/session3.md) — 문자열 함수 + ORDER BY
@@ -14,52 +17,66 @@
 - [Session 5](unit2_queries/session5.md) — JOIN 실습 (emp/dept/salgrade)
 - [Session 6](unit2_queries/session6.md) — 집계 함수 + GROUP BY
 - [Session 7](unit2_queries/session7.md) — 서브쿼리 (Subquery)
+- [Session 8](unit2_queries/session8.md) — 날짜/시간 함수
 
 ### unit3_advanced — Advanced Topics
+
 - [Session 1](unit3_advanced/session1.md) — RDB 특징
 - [Session 2](unit3_advanced/session2.md) — 데이터 무결성(integrity) 보장
 - [Session 3](unit3_advanced/session3.md) — 정규화(Normalization)
 - [Session 4](unit3_advanced/session4.md) — NoSQL
 - [Session 5](unit3_advanced/session5.md) — Redis
+- [Session 6](unit3_advanced/session6.md) — 절차형 SQL: 저장 프로시저 & 함수
+- [Session 7](unit3_advanced/session7.md) — 트리거 & 이벤트
 
 ### 📝 Review
+
 - [Review](review.md) — SQL 질의어 종합 복습 (실행 순서, 서브쿼리, 조인)
+
+### 🚗 Team Project — 자동차 렌탈 시스템
+
+- [car_rental_team.md](car_rental_team.md) — 팀과제 완성본 (요구사항분석 → 논리/물리설계 → CREATE/INSERT → 쿼리 20개)
+- [자동차렌탈\_노션리뷰.md](자동차렌탈_노션리뷰.md) — 노션 제출물 리뷰 (스키마 3벌 공존, INSERT 불일치 등 문제 정리)
 
 ---
 
 ## unit1_basic — Basic Theory & DDL
 
-| 세션 | 제목 | 주요 내용 |
-|------|------|----------|
-| [Session 1](unit1_basic/session1.md) | **데이터베이스 기초 이론** | DB의 목적, 스키마, 3계층 구조, RDBMS 기본 구조, 키 개념 |
-| [Session 2](unit1_basic/session2.md) | **DDL 실습 (student / subject / enrol)** | 테이블 생성(PK, 복합키), 데이터 삽입, 구조 확인 |
+| 세션                                 | 제목                                     | 주요 내용                                                                           |
+| ------------------------------------ | ---------------------------------------- | ----------------------------------------------------------------------------------- |
+| [Session 1](unit1_basic/session1.md) | **데이터베이스 기초 이론**               | DB의 목적, 스키마, 3계층 구조, RDBMS 기본 구조, 키 개념                             |
+| [Session 2](unit1_basic/session2.md) | **DDL 실습 (student / subject / enrol)** | 테이블 생성(PK, 복합키), 데이터 삽입, 구조 확인                                     |
+| [Session 3](unit1_basic/session3.md) | **DML & DDL 변경 · DCL**                 | INSERT(다중/INSERT...SELECT), UPDATE, DELETE vs TRUNCATE, ALTER TABLE, GRANT/REVOKE |
 
 ## unit2_queries — SQL Querying
 
-| 세션 | 제목 | 주요 내용 |
-|------|------|----------|
-| [Session 1](unit2_queries/session1.md) | **SELECT 기초** | 컬럼 선택, DISTINCT, 별칭, 표현식, SQL 실행 순서 |
-| [Session 2](unit2_queries/session2.md) | **WHERE 조건** | 비교 연산자, 논리 연산자, BETWEEN, IN, LIKE, NULL 처리 |
-| [Session 3](unit2_queries/session3.md) | **문자열 함수 + ORDER BY** | LENGTH, INSTR, LPAD, RPAD, REPLACE, TRIM, CONCAT, 정렬 |
-| [Session 4](unit2_queries/session4.md) | **SCOTT 스키마 (dept / emp / salgrade)** | 자기참조 FK, 사원/부서/급여 테이블, 데이터 삽입 순서 |
-| [Session 5](unit2_queries/session5.md) | **JOIN 실습 (emp / dept / salgrade)** | 등가조인(NATURAL/USING/ON), INNER, LEFT/RIGHT OUTER, SELF, CROSS JOIN |
-| [Session 6](unit2_queries/session6.md) | **집계 함수 + GROUP BY** | COUNT, SUM, AVG, MIN, MAX, GROUP BY, HAVING, ROLLUP/CUBE |
-| [Session 7](unit2_queries/session7.md) | **서브쿼리 (Subquery)** | 단일행, 다중행(IN, ANY/SOME, ALL), 상관서브쿼리, EXISTS/NOT EXISTS |
+| 세션                                   | 제목                                     | 주요 내용                                                                     |
+| -------------------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------- |
+| [Session 1](unit2_queries/session1.md) | **SELECT 기초**                          | 컬럼 선택, DISTINCT, 별칭, 표현식, SQL 실행 순서                              |
+| [Session 2](unit2_queries/session2.md) | **WHERE 조건**                           | 비교 연산자, 논리 연산자, BETWEEN, IN, LIKE, NULL 처리                        |
+| [Session 3](unit2_queries/session3.md) | **문자열 함수 + ORDER BY**               | LENGTH, INSTR, LPAD, RPAD, REPLACE, TRIM, CONCAT, 정렬                        |
+| [Session 4](unit2_queries/session4.md) | **SCOTT 스키마 (dept / emp / salgrade)** | 자기참조 FK, 사원/부서/급여 테이블, 데이터 삽입 순서                          |
+| [Session 5](unit2_queries/session5.md) | **JOIN 실습 (emp / dept / salgrade)**    | 등가조인(NATURAL/USING/ON), INNER, LEFT/RIGHT OUTER, SELF, CROSS JOIN         |
+| [Session 6](unit2_queries/session6.md) | **집계 함수 + GROUP BY**                 | COUNT, SUM, AVG, MIN, MAX, GROUP BY, HAVING, ROLLUP/CUBE                      |
+| [Session 7](unit2_queries/session7.md) | **서브쿼리 (Subquery)**                  | 단일행, 다중행(IN, ANY/SOME, ALL), 상관서브쿼리, EXISTS/NOT EXISTS            |
+| [Session 8](unit2_queries/session8.md) | **날짜/시간 함수**                       | NOW/CURDATE, YEAR/MONTH/DAY, DATE_ADD/SUB, DATEDIFF, DATE_FORMAT, STR_TO_DATE |
 
 ## unit3_advanced — Advanced Topics
 
-| 세션 | 제목 | 주요 내용 |
-|------|------|----------|
-| [Session 1](unit3_advanced/session1.md) | **RDB 특징** | 관계형 모델, 2차원 테이블, 데이터 무결성, 스키마 정의 |
-| [Session 2](unit3_advanced/session2.md) | **데이터 무결성** | 개체 무결성(PK), 참조 무결성(FK), 도메인 무결성(NOT NULL, CHECK, UNIQUE) |
-| [Session 3](unit3_advanced/session3.md) | **정규화** | 1NF → 2NF → 3NF → BCNF, 이상현상 제거, 장단점 |
-| [Session 4](unit3_advanced/session4.md) | **NoSQL** | RDB 한계 극복, 키-값/문서/열/그래프 저장소, RDB vs NoSQL 비교 |
-| [Session 5](unit3_advanced/session5.md) | **Redis** | Remote Dictionary Server, 인메모리 저장, 데이터 구조(String, Hash, List, Set, Sorted Set), 사용 사례 |
+| 세션                                    | 제목                                 | 주요 내용                                                                                            |
+| --------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| [Session 1](unit3_advanced/session1.md) | **RDB 특징**                         | 관계형 모델, 2차원 테이블, 데이터 무결성, 스키마 정의                                                |
+| [Session 2](unit3_advanced/session2.md) | **데이터 무결성**                    | 개체 무결성(PK), 참조 무결성(FK), 도메인 무결성(NOT NULL, CHECK, UNIQUE)                             |
+| [Session 3](unit3_advanced/session3.md) | **정규화**                           | 1NF → 2NF → 3NF → BCNF, 이상현상 제거, 장단점                                                        |
+| [Session 4](unit3_advanced/session4.md) | **NoSQL**                            | RDB 한계 극복, 키-값/문서/열/그래프 저장소, RDB vs NoSQL 비교                                        |
+| [Session 5](unit3_advanced/session5.md) | **Redis**                            | Remote Dictionary Server, 인메모리 저장, 데이터 구조(String, Hash, List, Set, Sorted Set), 사용 사례 |
+| [Session 6](unit3_advanced/session6.md) | **절차형 SQL: 저장 프로시저 & 함수** | DECLARE→BEGIN→END 블록, DELIMITER, IN/OUT/INOUT, IF/LOOP/WHILE, 커서·핸들러, CREATE FUNCTION         |
+| [Session 7](unit3_advanced/session7.md) | **트리거 & 이벤트**                  | BEFORE/AFTER 트리거, NEW/OLD 참조, 감사 로그·재고 자동 갱신, SIGNAL, CREATE EVENT                    |
 
 ## 📝 Review — SQL 질의어 종합 복습
 
-| 파일 | 제목 | 주요 내용 |
-|------|------|----------|
+| 파일                   | 제목                | 주요 내용                                                                  |
+| ---------------------- | ------------------- | -------------------------------------------------------------------------- |
 | [review.md](review.md) | **SQL 질의어 복습** | 실행 순서(FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY), 서브쿼리, 조인 종류 |
 
 ---
@@ -68,24 +85,30 @@
 
 ```
 Database/
-├── unit1_basic/          # Basic Theory & DDL (2 sessions)
+├── unit1_basic/          # Basic Theory & DDL (3 sessions)
 │   ├── session1.md       # DB 기초 이론
-│   └── session2.md       # DDL 실습
-├── unit2_queries/        # SQL Querying (7 sessions)
+│   ├── session2.md       # DDL 실습
+│   └── session3.md       # DML & DCL
+├── unit2_queries/        # SQL Querying (8 sessions)
 │   ├── session1.md       # SELECT 기초
 │   ├── session2.md       # WHERE 조건
 │   ├── session3.md       # 문자열 함수
 │   ├── session4.md       # SCOTT 스키마
 │   ├── session5.md       # JOIN 실습
 │   ├── session6.md       # 집계 함수
-│   └── session7.md       # 서브쿼리
-├── unit3_advanced/       # Advanced Topics (5 sessions)
+│   ├── session7.md       # 서브쿼리
+│   └── session8.md       # 날짜/시간 함수
+├── unit3_advanced/       # Advanced Topics (7 sessions)
 │   ├── session1.md       # RDB 특징
 │   ├── session2.md       # 데이터 무결성
 │   ├── session3.md       # 정규화
 │   ├── session4.md       # NoSQL
-│   └── session5.md       # Redis
+│   ├── session5.md       # Redis
+│   ├── session6.md       # 절차형 SQL (프로시저 · 함수)
+│   └── session7.md       # 트리거 & 이벤트
 ├── review.md             # SQL 질의어 종합 복습
+├── car_rental_team.md    # 팀과제: 자동차 렌탈 시스템 완성본
+├── 자동차렌탈_노션리뷰.md # 팀과제: 노션 제출물 리뷰
 └── README.md             # 이 파일
 ```
 

@@ -26,6 +26,8 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+docs/
+
 # PyInstaller
 #   Usually these files are written by a python script from a template
 #   before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -216,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+FastAPI/sources/*.exe
+FastAPI/sources/pyvenv.cfg
+FastAPI/**/__pycache__/

@@ -21,7 +21,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Titanic dataset 불러오기
-# notebook 위치: Machine Learning/Jupyter/titanic.ipynb
+# notebook 위치: Machine Learning/Jupyter/02_titanic_classification.ipynb
 # 데이터 위치: Machine Learning/data/train.csv
 # Jupyter는 notebook이 있는 폴더(Jupyter/)가 실행 기준(base directory)이므로
 # 한 칸 위로 올라가서 data 폴더로 진입해야 함
@@ -32,10 +32,10 @@ titanic_data
 - 세션 01에서 배운 도구 3종(numpy, pandas, matplotlib)을 실제 프로젝트에 첫 적용
 - `pd.read_csv()`로 CSV 파일을 DataFrame으로 읽는다
 - 실행 구조:
-  - notebook: `Machine Learning/Jupyter/titanic.ipynb`
+  - notebook: `Machine Learning/Jupyter/02_titanic_classification.ipynb`
   - 데이터: `Machine Learning/data/train.csv`
   - Jupyter는 notebook 폴더(`Jupyter/`) 기준으로 경로를 해석하므로 `../data/train.csv` 사용
-- NumPy 입문 실습은 `Machine Learning/Jupyter/numpy_basics.ipynb`를 참고
+- NumPy 입문 실습은 `Machine Learning/Jupyter/01_numpy_basics.ipynb`를 참고
 - 대안: 절대경로 사용 — `pd.read_csv(r'C:\AX Academy\study\Machine Learning\data\train.csv')` (위치에 관계없이 항상 동작)
 
 > **쉽게 이해하기**  

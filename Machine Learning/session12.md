@@ -13,8 +13,8 @@
 
 | 구분 | 경로 |
 | ---- | ---- |
-| Titanic 노트북 | `Machine Learning/Jupyter/titanic.ipynb` |
-| Social Ads 노트북 | `Machine Learning/Jupyter/social_network_ads.ipynb` |
+| Titanic 노트북 | `Machine Learning/Jupyter/02_titanic_classification.ipynb` |
+| Social Ads 노트북 | `Machine Learning/Jupyter/05_social_network_ads_rf.ipynb` |
 | Social Ads 데이터 | `Machine Learning/data/Social_Network_Ads.csv` |
 | Titanic 데이터 (기존) | `Machine Learning/data/train.csv` |
 
@@ -29,7 +29,7 @@
 
 ## 1. Titanic — Bagging (Random Forest)
 
-- notebook: `titanic.ipynb`
+- notebook: `02_titanic_classification.ipynb`
 - session06 앙상블의 Bagging을 타이타닉에 적용
 - `RandomForestClassifier(n_estimators=10)` = DT 10개를 부트스트랩으로 학습
 - `GradientBoostingClassifier`도 import (이어서 Boosting 비교용)

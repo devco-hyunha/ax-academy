@@ -118,7 +118,7 @@ flowchart LR
 
 ## 실습 노트북
 
-- `Machine Learning/Jupyter/diabetes.ipynb`에서 BMI 단변수 회귀·R² 실습
+- `Machine Learning/Jupyter/03_diabetes_regression.ipynb`에서 BMI 단변수 회귀·R² 실습
 
 > **쉽게 이해하기**  
 > 위 개념을 숫자로 직접 확인하는 노트북입니다.  

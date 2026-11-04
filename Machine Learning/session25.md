@@ -2,7 +2,7 @@
 
 <!-- session-nav -->
 
-**이동:** [← 세션 24](./session24.md)
+**이동:** [← 세션 24](./session24.md) · [세션 26 →](./session26.md)
 
 날짜: 2026.11.04  
 카페: [지금까지 한 코드](https://cafe.naver.com/f-e/cafes/31780422/articles/624)  
@@ -52,24 +52,19 @@
 
 ---
 
-## 3. 데이터 경로 주의
+## 3. 데이터 경로
 
-노트북 원문은 수업 PC 경로를 씁니다.
+로컬 파일: [`data/online_retail.csv`](./data/online_retail.csv)
 
-```python
-df = pd.read_csv("C:/run/online_retail.csv")
-```
-
-이 저장소 `data/`에는 아직 `online_retail.csv`가 없을 수 있습니다.  
-파일을 받아 `Machine Learning/data/`에 둔 뒤, 노트북에서는 보통 아래로 바꿉니다.
+노트북에서는 아래로 읽습니다.
 
 ```python
 df = pd.read_csv("../data/online_retail.csv")
 ```
 
 > **쉽게 이해하기**  
-> 경로가 다르면 “파일을 찾을 수 없다”는 오류가 납니다.  
-> CSV를 `data/`에 넣고 `../data/...`로 맞추면 Jupyter에서 읽기 쉽습니다.
+> Jupyter는 노트북이 있는 `Jupyter/` 폴더가 기준입니다.  
+> 그래서 한 칸 위의 `data/`는 `../data/파일명.csv`로 가리킵니다.
 
 ---
 
@@ -89,10 +84,11 @@ df = pd.read_csv("../data/online_retail.csv")
 카페 article 624 · Untitled9 → Jupyter/12_pandas_review.ipynb
 Series vs DataFrame, 불리언 인덱싱, iloc
 online_retail: CustomerID 결측 확인 후 notnull로 필터
-경로: 원문 C:/run/... → 로컬은 ../data/ 권장
+경로: ../data/online_retail.csv
 이전: session24 DBSCAN 실습
+다음: session26 RFM 군집화
 ```
 
 <!-- session-nav -->
 
-**이동:** [← 세션 24](./session24.md)
+**이동:** [← 세션 24](./session24.md) · [세션 26 →](./session26.md)

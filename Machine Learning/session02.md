@@ -1,5 +1,8 @@
 # 세션 02: Jupyter Notebook 설치 및 사용
 
+<!-- session-nav -->
+**이동:** [← 세션 01](./session01.md) · [세션 03 →](./session03.md)
+
 Jupyter Notebook은 셀(Cell) 단위로 Python 코드를 실행하고, 실행 결과·시각화·설명을 한 문서에 함께 담는 도구입니다. 머신러닝 학습에서는 데이터 확인과 그래프 표시에 최적화되어 있어 가장 많이 사용됩니다.
 
 > **이 세션이 하는 일 (쉬운 말)**  
@@ -38,20 +41,10 @@ python -m pip list | Select-String -Pattern "jupyter|ipykernel|notebook|pandas|m
 - `pandas`, `matplotlib`가 없으면 ModuleNotFoundError의 원인 → `pip install pandas matplotlib`으로 설치
 
 > **쉽게 이해하기**  
-> **Jupyter**는 한 장에 **설명 + 코드 + 결과(그래프)** 를 같이 적어 두는 디지털 연습장입니다.  
-> 파일 확장자는 `.ipynb` (notebook)입니다.
->
-> 설치를 세 덩어리로 나누면 이해가 쉽습니다.
->
-> 1. **Python**: 코드를 실행하는 엔진. PATH에 넣어야 터미널에서 `python`, `pip`가 됩니다.
-> 2. **JupyterLab + 라이브러리**: 연습장 프로그램과, ML에 자주 쓰는 도구(`numpy`, `pandas` 등)
-> 3. **실행**: `jupyter lab` → 브라우저가 열리고, 거기서 새 노트북을 만듭니다.
->
-> **Anaconda**를 쓰면 Python·Jupyter가 묶음으로 들어오는 경우가 많습니다.  
-> 그때는 **Anaconda Prompt**(아나콘다용 검은 창)를 열고 `jupyter lab`만 치면 됩니다.
->
-> **커널(kernel)** = 노트북 뒤에서 실제로 Python을 돌리는 “엔진”.  
-> 패키지가 안 보이면, 대개 **그 커널이 쓰는 Python**에 패키지가 없는 것입니다.
+> **Jupyter**는 설명·코드·실행 결과를 한 파일(`.ipynb`)에 쌓아 두는 연습장입니다.  
+> **Python**으로 코드를 돌리고, **JupyterLab**으로 칸을 실행합니다.  
+> **커널(kernel)** 은 노트북 뒤에서 돌아가는 Python입니다. 패키지 오류가 나면 보통 그 커널 환경에 설치가 빠진 경우입니다.  
+> Anaconda를 쓰면 **Anaconda Prompt**에서 `jupyter lab`만 실행해도 됩니다.
 
 ---
 
@@ -87,19 +80,10 @@ python -m pip list | Select-String -Pattern "jupyter|ipykernel|notebook|pandas|m
 - pandas 3.x부터 `inplace=True`는 deprecation 경고 → 결과를 변수에 재대입하는 방식으로 사용
 
 > **쉽게 이해하기**  
-> Cursor나 VS Code에서도 `.ipynb`를 열면, 브라우저 Jupyter와 **같은 셀 실행**이 가능합니다.  
-> 다만 **Jupyter 확장**이 반드시 필요합니다. 확장이 “에디터 ↔ Python 커널” 연결 담당입니다.
->
-> 자주 하는 실수와 대응:
->
-> - **커널을 안 고름**: 우측 상단 Select Kernel에서, 패키지 설치한 Python을 고릅니다.
-> - **커널 재시작**: 변수·상태가 꼬였을 때 “엔진을 껐다 켜기”.  
->   `Ctrl+Shift+P` → `Jupyter: Restart Kernel`
-> - **503 오류**: 확장/서버 쪽 연결 문제인 경우가 많습니다. 확장 설치 후 창 다시 로드.
-> - **ModuleNotFoundError**: “그 커널의 Python”에 패키지가 없음 → 그 환경에 `pip install` 후 커널 재시작.
->
-> `inplace=True`는 예전 습관인데, 새 pandas에서는 경고가 납니다.  
-> `df = df.fillna(0)`처럼 **결과를 다시 변수에 넣는** 쪽이 안전합니다.
+> Cursor·VS Code에서도 `.ipynb` 셀 실행이 가능합니다. **Jupyter 확장**이 에디터와 커널을 연결합니다.  
+> 우측 **Select Kernel**에서 패키지를 넣어 둔 Python을 고릅니다.  
+> `ModuleNotFoundError`는 그 커널에 `pip install` 후 **Restart Kernel**로 해결하는 경우가 많습니다.  
+> pandas는 `df = df.fillna(0)`처럼 결과를 다시 변수에 넣는 편이 안전합니다.
 
 ---
 
@@ -114,19 +98,9 @@ python -m pip list | Select-String -Pattern "jupyter|ipykernel|notebook|pandas|m
   4. 모델 학습·평가 셀
 
 > **쉽게 이해하기**  
-> 노트북은 **칸(셀)** 을 쌓아 올린 문서입니다.
->
-> - **Code 셀**: 실행되는 파이썬. 결과가 바로 아래에 붙습니다.
-> - **Markdown 셀**: 사람용 설명·제목. 실행하면 예쁜 문서로 보입니다.
->
-> 실습할 때 흔히 쓰는 칸 배치:
->
-> 1. 도구 가져오기 (`import …`)
-> 2. 데이터 읽기·눈으로 확인
-> 3. 손질·그림 그리기
-> 4. 모델 학습·점수 보기
->
-> 위에서 아래로 **이야기책처럼** 읽히게 쓰면, 나중에 본인도 다시 이해하기 쉽습니다.
+> 노트북은 **셀(cell)** 을 위에서 아래로 쌓은 문서입니다.  
+> **Code 셀**은 파이썬을 실행하고, **Markdown 셀**은 설명을 적습니다.  
+> 실습은 보통 import → 데이터 확인 → 전처리·그림 → 학습·평가 순으로 씁니다.
 
 ---
 
@@ -150,17 +124,9 @@ python -m pip list | Select-String -Pattern "jupyter|ipykernel|notebook|pandas|m
 - 마우스로 추가도 가능: 상단 `+ New Cell` 버튼 (Code / Markdown 선택)
 
 > **쉽게 이해하기**  
-> Jupyter에는 두 가지 **모드(mode)** 가 있습니다. (중국어·중복 표기는 쓰지 않습니다.)
->
-> - **편집 모드**: 셀 안에서 글자를 치는 상태. 커서가 깜빡입니다.  
->   이 상태에서는 `B`, `A` 같은 단축키가 “글자 입력”으로 먹혀 버립니다.
-> - **명령 모드**: `Esc`를 눌러 셀 “밖”으로 나온 상태. 테두리가 강조됩니다.  
->   이제 `B`(아래 셀 추가), `A`(위 셀 추가), `DD`(삭제)가 동작합니다.
->
-> **코드를 이어 갈 때** 가장 편한 키: `Alt + Enter`  
-> → 지금 셀 실행 + 바로 아래 새 셀 생성.
->
-> `Esc` → `M` = Markdown, `Esc` → `Y` = Code 로 셀 종류를 바꿉니다.
+> Jupyter는 **편집 모드**(셀 안에서 타이핑)와 **명령 모드**(`Esc` 후 셀 조작) 두 가지입니다.  
+> 명령 모드에서만 `B`·`A`·`DD` 같은 단축키가 셀 추가·삭제로 동작합니다.  
+> `Alt + Enter`는 실행 후 아래에 새 Code 셀을 만듭니다. `Esc` → `M`은 Markdown, `Y`는 Code입니다.
 
 ---
 
@@ -171,13 +137,9 @@ python -m pip list | Select-String -Pattern "jupyter|ipykernel|notebook|pandas|m
 - 절대경로가 항상 안전: `pd.read_csv(r'C:\AX Academy\study\Machine Learning\data\train.csv')`
 
 > **쉽게 이해하기**  
-> `pd.read_csv('data/train.csv')`처럼 **상대 경로**를 쓰면,  
-> “지금 노트북이 있는 폴더”를 출발점으로 파일을 찾습니다.  
-> 노트북 위치를 옮기면 같은 코드가 깨질 수 있습니다.
->
-> - `../` = 한 단계 위 폴더
-> - 헷갈리면 **절대 경로**(드라이브부터 전체 경로)가 안전합니다.  
->   Windows에서는 `r'C:\...'`처럼 `r`을 붙이면 역슬래시 이스케이프를 덜 걱정해도 됩니다.
+> **상대 경로**는 노트북 파일이 있는 폴더를 기준으로 파일을 찾습니다.  
+> 노트북 위치가 바뀌면 같은 코드가 실패할 수 있습니다.  
+> `../`는 한 단계 위 폴더입니다. 헷갈리면 `r'C:\...'` 형태의 **절대 경로**가 안전합니다.
 
 ---
 
@@ -198,10 +160,9 @@ plt.show()
 > 셀을 실행하면 버전 출력과 그래프가 셀 아래에 나타남. 위가 잘되면 세션 노트의 코드를 셀 단위로 하나씩 실행하며 따라가면 됩니다
 
 > **쉽게 이해하기**  
-> 이 셀은 “설치가 진짜 됐는지” 확인하는 **헬스 체크**입니다.  
-> 버전 숫자가 찍히고 빨간 점 그래프가 나오면,  
-> NumPy·Pandas·그림 그리기까지 **같은 커널**에서 준비된 것입니다.  
-> 그다음부터는 세션 노트의 코드를 **한 셀씩** 옮겨 실행하면 됩니다.
+> 이 셀은 설치 확인용입니다.  
+> 버전 출력과 그래프가 보이면 NumPy·Pandas·Matplotlib이 같은 커널에서 준비된 것입니다.  
+> 이후 세션 코드를 한 셀씩 실행하면 됩니다.
 
 ---
 
@@ -223,3 +184,6 @@ plt.show()
 5. Ctrl+Enter = 현재 셀만 실행. Alt+Enter = 실행 + 아래 새 셀 생성(이어서 쓰기 좋음).
 
 </details>
+
+<!-- session-nav -->
+**이동:** [← 세션 01](./session01.md) · [세션 03 →](./session03.md)

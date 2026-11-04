@@ -1,5 +1,8 @@
 # 세션 12: 오후 실습 (Titanic Bagging / Social_Network_Ads)
 
+<!-- session-nav -->
+**이동:** [← 세션 11](./session11.md) · [세션 13 →](./session13.md)
+
 > **이 세션이 하는 일 (쉬운 말)**  
 > 이론은 이미 session06(앙상블)·session08(전처리 규칙)에서 봤습니다.  
 > 오늘은 노트북으로 **직접 돌려 보는 실습**입니다.  
@@ -21,9 +24,7 @@
 - Jupyter 실행 기준은 `Jupyter/` 폴더 → 데이터는 `../data/...`로 읽음
 
 > **쉽게 이해하기**  
-> 노트북은 `Jupyter/` 안에서 열고, 데이터는 한 단계 위 `data/`에 있습니다.  
-> 그래서 경로가 `../data/...`입니다.  
-> (노트북 위치 기준으로 “한 칸 위로 가서 data 폴더”라는 뜻입니다.)
+> 노트북은 `Jupyter/` 에서 열고, 데이터는 한 칸 위 `data/` 이므로 `../data/...` 를 씁니다.
 
 ---
 
@@ -35,18 +36,9 @@
 - `GradientBoostingClassifier`도 import (이어서 Boosting 비교용)
 
 > **쉽게 이해하기**  
-> 타이타닉은 “이 승객이 **생존했을까?**”를 맞추는 **분류** 문제입니다.
->
-> 여기서 쓰는 것은 **Bagging** 계열의 **Random Forest(랜덤 포레스트)** 입니다.
->
-> - 결정 트리(Decision Tree)를 **여러 개**(여기서는 10개, `n_estimators=10`) 만듭니다  
-> - 각 트리는 데이터를 **조금씩 다르게 뽑아(부트스트랩, bootstrap)** 학습합니다  
-> - 마지막에 투표(또는 평균)로 답을 정합니다
->
-> 왜 하나요?  
-> 트리 하나면 데이터에 민감해서 흔들릴 수 있습니다.  
-> 여러 개를 **병렬로** 키워 합치면 흔들림이 줄어드는 것이 Bagging의 아이디어입니다.  
-> (`GradientBoostingClassifier`는 나중에 Boosting과 **비교**해 보려고 import해 둔 것입니다.)
+> 타이타닉 **분류(Classification)** 는 승객 **생존 여부** 를 맞춥니다.  
+> **Random Forest(랜덤 포레스트)** 는 **Bagging** 으로 결정 트리 **10개**(`n_estimators=10`)를 **부트스트랩(bootstrap, 복원 추출)** 로 학습해 투표합니다.  
+> 트리 하나보다 흔들림이 줄어듭니다. `GradientBoostingClassifier` 는 Boosting 비교용 import입니다.
 
 ### 평가 헬퍼 `eval_model`
 
@@ -73,19 +65,9 @@ def eval_model(model, X_train, y_train, X_test, y_test):
 ```
 
 > **쉽게 이해하기**  
-> `eval_model`은 “모델 하나 넣으면 **학습 → 예측 → 점수·시간**을 한 번에 돌려주는” 도우미 함수입니다.
->
-> 안에서 보는 것:
->
-> - `fit`: 학습  
-> - `predict`: 예측  
-> - **accuracy(정확도)**: 맞힌 비율  
-> - **F1-score**: 정밀도·재현율을 균형 있게 보는 점수 (생존처럼 클래스 불균형이 있을 때 자주 함께 봄)  
-> - `elapse_time`: 학습에 걸린 시간
->
-> train/test를 **둘 다** 재는 이유:  
-> train만 높고 test가 낮으면 **과적합** 신호일 수 있습니다.  
-> 실습에서는 주로 **test 점수**로 “새 데이터에 얼마나 버티나”를 봅니다.
+> `eval_model` 은 **fit → predict → 정확도·F1·시간** 을 한 번에 돌립니다.  
+> **accuracy(정확도)** 는 맞힌 비율, **F1-score** 는 정밀도·재현율 균형 점수입니다.  
+> train이 높고 test가 낮으면 **과적합(overfitting)** 신호일 수 있어, 실습은 **test** 를 봅니다.
 
 ### Bagging 학습·결과
 
@@ -104,16 +86,8 @@ print(f"Bagging 정확도: {acc_test:.2f}, F1-score: {f1_test:.2f}, 학습시간
 | F1-score (test) | **0.71** |
 
 > **쉽게 이해하기**  
-> `random_state=1`은 “랜덤을 같은 시드로 고정”해서  
-> 다시 실행해도 **같은 결과**가 나오게 합니다. (재현성)
->
-> 표의 숫자는 이 설정으로 돌렸을 때 **test**에서 나온 예시 결과입니다.
->
-> - 정확도 0.79 → 대략 100명 중 79명꼴로 맞춤  
-> - F1 0.71 → 정확도만 보지 않고, 맞힘의 **질**도 함께 본 점수
->
-> “완벽한 점수”가 목표가 아니라,  
-> **Bagging을 타이타닉에 붙이는 절차**와 **평가 보는 법**을 익히는 것이 목적입니다.
+> `random_state=1` 은 같은 **난수 시드** 로 결과를 고정합니다(재현성).  
+> 예시 **test** 정확도 0.79, F1 0.71 은 절차·평가 익히기용입니다. 완벽 점수가 목표는 아닙니다.
 
 ---
 
@@ -130,15 +104,8 @@ print(f"Bagging 정확도: {acc_test:.2f}, F1-score: {f1_test:.2f}, 학습시간
 | Purchased | 구매 여부 (0/1) — **label** |
 
 > **쉽게 이해하기**  
-> SNS 광고 맥락의 연습 데이터입니다.  
-> 각 줄 = 사용자 한 명.
->
-> - **Age**, **EstimatedSalary**: 모델에 넣을 **피처(feature)**  
-> - **Purchased**: 광고 상품을 샀는지(0/1) — **label(정답 라벨)**  
-> - User ID는 사람 구분자일 뿐 패턴이 아니라서 보통 제외  
-> - 이 실습에서는 Gender도 빼고, 나이·급여만 사용합니다
->
-> 목표: “나이와 급여를 보고 **살까/안 살까**를 분류”하는 것입니다.
+> 각 줄은 사용자 한 명입니다. **Age**, **EstimatedSalary** 가 **피처(feature)**, **Purchased** 가 **label(정답)** 입니다.  
+> User ID·Gender 는 빼고, 나이·급여로 **구매 여부(0/1)** 를 분류합니다.
 
 ### 실습 흐름
 
@@ -152,18 +119,9 @@ flowchart TD
 ```
 
 > **쉽게 이해하기**  
-> 왜 이 순서인가요?
->
-> 1. **CSV 로드**: 표 읽기  
-> 2. **X / y 나누기**: 원인(피처)과 정답(라벨) 분리  
-> 3. **train_test_split**: 학습용 80% / 시험용 20%로 쪼개기  
->    → 외운 문제로만 잘하는지(과적합) 걸러 내기 위함  
-> 4. **StandardScaler**: 나이(수십)와 급여(수만)처럼 **단위·크기가 다른 숫자**를  
->    비슷한 스케일로 맞춤. 거리·분할이 한 피처에만 끌려가지 않게 하려는 전처리  
-> 5. **Random Forest**: 트리 여러 개로 분류 학습
->
-> “데이터를 읽자마자 바로 모델”이 아니라,  
-> **쪼개고 → (필요하면) 스케일 → 학습**이 기본 루틴입니다.
+> 순서는 **로드 → X/y 분리 → train_test_split → StandardScaler → Random Forest** 입니다.  
+> 스케일은 단위가 다른 숫자를 맞추는 전처리입니다.  
+> **쪼개고 → (필요하면) 스케일 → 학습** 이 기본 루틴입니다.
 
 ### 핵심 코드
 
@@ -196,27 +154,10 @@ rf = RandomForestClassifier(
 - `criterion='entropy'`: 분할 기준으로 엔트로피(정보이득) 사용
 
 > **쉽게 이해하기**  
-> 코드 한 줄씩 “왜”만 짚습니다. (체크리스트·원문 규칙은 위 불릿 그대로입니다.)
->
-> - `iloc[:, [2, 3]]`: 표에서 Age, EstimatedSalary 열만 고름  
-> - `test_size=0.2`: 20%를 시험용으로 남겨 둠  
-> - **스케일러 규칙 (아주 중요)**  
->   - train: `fit_transform` → “평균·표준편차를 **학습 데이터로만** 계산하고 변환”  
->   - test: `transform`만 → “이미 배운 기준으로만 변환”  
->   - test에까지 `fit` 하면 시험지를 미리 엿보는 **데이터 누수(data leakage)** 가 됩니다  
->     → session08에서 본 메서드 규칙과 같습니다
->
-> - `n_estimators=10`: 트리 10개  
-> - `criterion="entropy"`: 트리가 가지를 나눌 때  
->   **엔트로피(entropy) / 정보이득(information gain)** 기준으로 “얼마나 깨끗해지나”를 봄  
->   (지니 불순도 대신 엔트로피 쪽을 쓰는 설정입니다)
->
-> 실습 체크포인트:
->
-> 1. 경로 `../data/...`가 맞는지  
-> 2. X/y가 의도한 열인지  
-> 3. scaler가 train만 fit인지  
-> 4. Random Forest 하이퍼파라미터를 바꿔 보며 점수·시간을 비교해 보기
+> `iloc[:, [2, 3]]` 로 Age·EstimatedSalary 만 씁니다. `test_size=0.2` 는 20% 시험용입니다.  
+> train은 `fit_transform`, test는 `transform` 만 — test에 `fit` 하면 **데이터 누수(data leakage)** 입니다(session08과 동일).  
+> `n_estimators=10`, `criterion="entropy"`(엔트로피·정보이득 분할) 설정입니다.  
+> 경로·X/y·scaler fit 여부를 체크하세요.
 
 ---
 
@@ -238,3 +179,6 @@ rf = RandomForestClassifier(
 5. 엔트로피(정보이득)를 분할 기준으로 사용합니다.
 
 </details>
+
+<!-- session-nav -->
+**이동:** [← 세션 11](./session11.md) · [세션 13 →](./session13.md)

@@ -7,9 +7,10 @@
 이 폴더는 **파이썬·Jupyter를 처음 쓰는 분**도 따라 올 수 있게 적어 두었습니다.
 
 1. **순서:** [`session01.md`](./session01.md)부터 번호 순으로 읽습니다. 각 문서 위·아래 **이동** 링크로 이전·다음 세션을 열 수 있습니다.
-2. **세션 vs 노트북:** `sessionNN.md`는 **개념·순서** 설명입니다. `Jupyter/01_`~`13_` 노트북은 **손으로 실행하는 실습**입니다. 번호는 실습 순서라 **세션 번호와 같지 않을 수** 있습니다(B안).
+2. **세션 vs 노트북:** `sessionNN.md`는 **개념·순서** 설명입니다. `Jupyter/01_`~`15_` 노트북은 **손으로 실행하는 실습**입니다. 번호는 실습 순서라 **세션 번호와 같지 않을 수** 있습니다(B안).
 3. **데이터:** CSV는 [`data/`](./data/)에 둡니다. 노트북에서는 보통 `../data/파일명.csv`로 읽습니다.
 4. **읽는 팁:** 본문의 **이 세션이 하는 일**과 **쉽게 이해하기**를 먼저 읽은 뒤, 표·코드를 보시면 부담이 덜합니다.
+5. **딥러닝:** 딥러닝 노트는 [`../Deep Learning/`](../Deep%20Learning/)에서 이어갑니다.
 
 ## 세션 목록
 
@@ -41,10 +42,13 @@
 - [`session26.md`](./session26.md) — 군집화 (RFM · K-Means · DBSCAN)
 - [`session27.md`](./session27.md) — 문제 1 — Medical Cost 고객 군집화
 - [`session28.md`](./session28.md) — 문제 2 — Customer Churn 로지스틱 회귀
+- [`session29.md`](./session29.md) — 머신러닝 8 (차원의 저주 · PCA 개념)
+- [`session30.md`](./session30.md) — PCA 실습 (ChurnData)
+- [`session31.md`](./session31.md) — 타이타닉으로 데이터 분석 (EDA 보강)
 
 ## Jupyter 실습 파일
 
-`01_`~`13_` 접두 번호는 **실습 진행 순서**이며, 세션 번호와 무관합니다(B안).
+`01_`~`15_` 접두 번호는 **실습 진행 순서**이며, 세션 번호와 무관합니다(B안).
 
 - [`Jupyter/01_numpy_basics.ipynb`](./Jupyter/01_numpy_basics.ipynb) — NumPy 입문
 - [`Jupyter/02_titanic_classification.ipynb`](./Jupyter/02_titanic_classification.ipynb) — 타이타닉 분류·앙상블
@@ -59,8 +63,10 @@
 - [`Jupyter/11_dbscan_clustering.ipynb`](./Jupyter/11_dbscan_clustering.ipynb) — K-Means·DBSCAN 군집화 실습
 - [`Jupyter/12_pandas_review.ipynb`](./Jupyter/12_pandas_review.ipynb) — pandas 복습(Series·불리언 인덱싱·결측 필터)
 - [`Jupyter/13_rfm_clustering.ipynb`](./Jupyter/13_rfm_clustering.ipynb) — RFM·K-Means·DBSCAN 고객 군집화
+- [`Jupyter/14_pca_churn.ipynb`](./Jupyter/14_pca_churn.ipynb) — ChurnData PCA·로지스틱
+- [`Jupyter/15_titanic_analysis.ipynb`](./Jupyter/15_titanic_analysis.ipynb) — 타이타닉 EDA 보강
 
 ## 파일 규칙
 
 - 각 세션은 `sessionNN.md`로 순번을 매긴다
-- 새 세션이 추가되면 session28.md 이후부터 이어간다
+- 새 세션이 추가되면 session31.md 이후부터 이어간다

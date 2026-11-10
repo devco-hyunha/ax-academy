@@ -2,7 +2,7 @@
 
 <!-- session-nav -->
 
-**이동:** [← 세션 01](./session01.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md)
+**이동:** [← 세션 01](./session01.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md)
 
 날짜: 2026.11.05  
 Notion: [딥러닝 기초 2](https://app.notion.com/p/2-27c974c0f4ae80c4875ef58568f74b26)
@@ -232,4 +232,4 @@ NumPy = 빠른 숫자 상자(ndarray)
 
 <!-- session-nav -->
 
-**이동:** [← 세션 01](./session01.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md)
+**이동:** [← 세션 01](./session01.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md)

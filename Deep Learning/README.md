@@ -16,6 +16,9 @@
 - [`session03.md`](./session03.md) — 딥러닝 기초 3 (텐서 차원·모양·view)
 - [`session04.md`](./session04.md) — 딥러닝 기초 3 (행렬곱·연산 + 사용자 Dataset·DataLoader)
 - [`session05.md`](./session05.md) — 딥러닝 기초 3 (`__call__`·Compose·MNIST·DataLoader)
+- [`session06.md`](./session06.md) — 딥러닝 기초 4 (ANN·퍼셉트론·활성화·nn.Module·TensorDataset)
+- [`session07.md`](./session07.md) — 딥러닝 기초 5 (선형회귀·state_dict·SGD·Optimizer 3연타·autograd)
+- [`session08.md`](./session08.md) — 딥러닝 기초 6 (커스텀 Module·LinearReg·다출력·Linear(4,2) 학습)
 
 ## PyTorch 노트북
 
@@ -24,6 +27,10 @@
 - [`PyTorch/03_tensor_matmul_ops.ipynb`](./PyTorch/03_tensor_matmul_ops.ipynb) — 행렬곱 · item · sum · argmax
 - [`PyTorch/04_custom_dataset.ipynb`](./PyTorch/04_custom_dataset.ipynb) — 사용자 Dataset · DataLoader
 - [`PyTorch/05_mnist_transforms_dataloader.ipynb`](./PyTorch/05_mnist_transforms_dataloader.ipynb) — Compose · MNIST · DataLoader · 시각화
+- [`PyTorch/06_tensor_dataset.ipynb`](./PyTorch/06_tensor_dataset.ipynb) — TensorDataset · DataLoader
+- [`PyTorch/07_linear_train_loop.ipynb`](./PyTorch/07_linear_train_loop.ipynb) — nn.Linear · MSE · SGD · state_dict 학습 루프
+- [`PyTorch/08_custom_linear_module.ipynb`](./PyTorch/08_custom_linear_module.ipynb) — 수동 forward · LinearReg · `__call__` · mse_loss
+- [`PyTorch/09_multi_output_linear.ipynb`](./PyTorch/09_multi_output_linear.ipynb) — Linear(4,2) · MSE · SGD · 다출력 학습 루프
 
 ## 파일 규칙
 

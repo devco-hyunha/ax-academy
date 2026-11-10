@@ -2,7 +2,7 @@
 
 <!-- session-nav -->
 
-**이동:** [세션 02 →](./session02.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md)
+**이동:** [세션 02 →](./session02.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md)
 
 날짜: 2026.11.05  
 카페: [딥러닝 기초 1](https://cafe.naver.com/f-e/cafes/31780422/articles/635)  
@@ -445,4 +445,4 @@ New W = old W − lr × Gradient
 
 <!-- session-nav -->
 
-**이동:** [세션 02 →](./session02.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md)
+**이동:** [세션 02 →](./session02.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md)

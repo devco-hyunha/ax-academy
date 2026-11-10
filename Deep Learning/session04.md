@@ -2,7 +2,7 @@
 
 <!-- session-nav -->
 
-**이동:** [← 세션 03](./session03.md) · [세션 05 →](./session05.md) · [세션 01](./session01.md) · [세션 02](./session02.md)
+**이동:** [← 세션 03](./session03.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md) · [세션 01](./session01.md) · [세션 02](./session02.md)
 
 날짜: 2026.11.06  
 Notion: [딥러닝 기초 3](https://app.notion.com/p/3-27b974c0f4ae80e3ae6df4a5e68760b5)
@@ -186,4 +186,4 @@ Notion: 딥러닝 기초 3
 
 <!-- session-nav -->
 
-**이동:** [← 세션 03](./session03.md) · [세션 05 →](./session05.md) · [세션 01](./session01.md) · [세션 02](./session02.md)
+**이동:** [← 세션 03](./session03.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md) · [세션 01](./session01.md) · [세션 02](./session02.md)

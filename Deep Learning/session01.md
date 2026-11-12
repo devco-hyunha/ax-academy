@@ -1,7 +1,5 @@
 # 세션 01: 딥러닝 기초 1 — 함수 · 미분 · 신경망 입문 · PyTorch 환경
 
-<!-- session-nav -->
-
 **이동:** [세션 02 →](./session02.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md)
 
 날짜: 2026.11.05  
@@ -65,8 +63,8 @@ def plot_linear(a, b):
 
     plt.figure(figsize=(8, 6))
     plt.plot(x, y, label=f"y = {a}x + {b}", color="blue", lw=2)
-    plt.axhline(0, color="black", lw=1)
-    plt.axvline(0, color="black", lw=1)
+    plt.axhline(0, color="black", lw=1) # axhline 함수 - x 축을 그리는 함수
+    plt.axvline(0, color="black", lw=1) # axvline 함수 - y 축을 그리는 함수
     plt.grid(True, linestyle="--")
     plt.xlim(-10, 10)
     plt.ylim(-10, 10)
@@ -413,8 +411,7 @@ python -m notebook
 5. 가중치 갱신식 `New W = old W − (Learning Rate) × (Gradient)` 에서 마이너스는 왜 붙나요?
 6. PyTorch 환경 이름 `torch-env`를 만드는 conda 명령은?
 
-<details>
-<summary>답 보기</summary>
+답 보기
 
 1. \( a \) (가중치)
 2. \( f'(x)=\lim\_{\Delta x \to 0}\dfrac{f(x+\Delta x)-f(x)}{\Delta x} \)
@@ -422,8 +419,6 @@ python -m notebook
 4. 층(Layer)이 여러 개인 신경망
 5. 기울기 방향의 **반대**로 가야 손실(오차)이 줄어들기 때문
 6. `conda create -n torch-env python=3.10 -y`
-
-</details>
 
 ---
 
@@ -442,7 +437,5 @@ New W = old W − lr × Gradient
 도구: PyTorch / TensorFlow
 환경: conda create -n torch-env ...
 ```
-
-<!-- session-nav -->
 
 **이동:** [세션 02 →](./session02.md) · [세션 03 →](./session03.md) · [세션 04 →](./session04.md) · [세션 05 →](./session05.md) · [세션 06 →](./session06.md) · [세션 07 →](./session07.md) · [세션 08 →](./session08.md)

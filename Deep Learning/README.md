@@ -19,6 +19,8 @@
 - [`session06.md`](./session06.md) — 딥러닝 기초 4 (ANN·퍼셉트론·활성화·nn.Module·TensorDataset)
 - [`session07.md`](./session07.md) — 딥러닝 기초 5 (선형회귀·state_dict·SGD·Optimizer 3연타·autograd)
 - [`session08.md`](./session08.md) — 딥러닝 기초 6 (커스텀 Module·LinearReg·다출력·Linear(4,2) 학습)
+- [`session09.md`](./session09.md) — 딥러닝 기초 7 (보스턴 집값·MinMax·MLP·DataLoader·R²·산점도)
+- [`session10.md`](./session10.md) — epoch·하이퍼파라미터 · 로지스틱 · Sequential · BCELoss · Adam · 이탈 실습
 
 ## PyTorch 노트북
 
@@ -31,6 +33,9 @@
 - [`PyTorch/07_linear_train_loop.ipynb`](./PyTorch/07_linear_train_loop.ipynb) — nn.Linear · MSE · SGD · state_dict 학습 루프
 - [`PyTorch/08_custom_linear_module.ipynb`](./PyTorch/08_custom_linear_module.ipynb) — 수동 forward · LinearReg · `__call__` · mse_loss
 - [`PyTorch/09_multi_output_linear.ipynb`](./PyTorch/09_multi_output_linear.ipynb) — Linear(4,2) · MSE · SGD · 다출력 학습 루프
+- [`PyTorch/10_boston_mlp.ipynb`](./PyTorch/10_boston_mlp.ipynb) — 보스턴 집값 · MinMax · MLP · DataLoader · MSE · R² · 산점도
+- [`PyTorch/11_churn_logistic.ipynb`](./PyTorch/11_churn_logistic.ipynb) — 이탈(churn) · StandardScaler · Sigmoid · BCELoss · Adam
+- [`PyTorch/12_insurance_smoke.ipynb`](./PyTorch/12_insurance_smoke.ipynb) — 보험·흡연(`charges` 포함 feature) · Sequential MLP · StandardScaler · BCELoss · Adam · F1·precision
 
 ## 파일 규칙
 

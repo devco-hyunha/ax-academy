@@ -2,7 +2,7 @@
 
 <!-- session-nav -->
 
-**이동:** [← 세션 07](./session07.md) · [세션 01](./session01.md) · [세션 02](./session02.md) · [세션 03](./session03.md) · [세션 04](./session04.md) · [세션 05](./session05.md) · [세션 06](./session06.md)
+**이동:** [← 세션 07](./session07.md) · [세션 09 →](./session09.md) · [세션 10](./session10.md) · [세션 01](./session01.md) · [세션 02](./session02.md) · [세션 03](./session03.md) · [세션 04](./session04.md) · [세션 05](./session05.md) · [세션 06](./session06.md)
 
 날짜: 2026.11.10
 
@@ -181,4 +181,4 @@ model(x)     : __call__ → forward(x)
 
 <!-- session-nav -->
 
-**이동:** [← 세션 07](./session07.md) · [세션 01](./session01.md) · [세션 02](./session02.md) · [세션 03](./session03.md) · [세션 04](./session04.md) · [세션 05](./session05.md) · [세션 06](./session06.md)
+**이동:** [← 세션 07](./session07.md) · [세션 09 →](./session09.md) · [세션 10](./session10.md) · [세션 01](./session01.md) · [세션 02](./session02.md) · [세션 03](./session03.md) · [세션 04](./session04.md) · [세션 05](./session05.md) · [세션 06](./session06.md)
